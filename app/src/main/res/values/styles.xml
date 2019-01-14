@@ -37,4 +37,7 @@
         <item name="android:textColor">#fff</item>
     </style>
 
+    <style name="switchStyle">
+        <item name="android:fontFamily">@font/font_for_app</item>
+    </style>
 </resources>

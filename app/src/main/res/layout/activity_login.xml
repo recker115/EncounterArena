@@ -1,7 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/pubg"
+    tools:context=".views.ui.activities.Login">
+
+    <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="#CC000000"
+            android:id="@+id/view"/>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+            android:id="@+id/materialEditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:mtf_labelColor="@color/colorAccent"
+            app:mtf_image="@mipmap/email"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/font_for_app"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/stickySwitch">
+        <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:hint="Email"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:maxLines="1"
+                android:inputType="textEmailAddress"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorAccent"
+                android:fontFamily="@font/font_for_app"
+        />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+        android:id="@+id/materialEditTextPassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialEditText"
+        app:mtf_labelColor="@color/colorAccent"
+        app:mtf_image="@mipmap/password"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/font_for_app"
+        >
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:hint="Password"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:inputType="textPassword"
+            android:textCursorDrawable="@null"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorAccent"
+            android:fontFamily="@font/font_for_app"
+            />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <com.github.florent37.materialtextfield.MaterialTextField
+            android:id="@+id/confirmPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialEditTextPassword"
+            app:mtf_labelColor="@color/colorAccent"
+            app:mtf_image="@mipmap/password"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/font_for_app"
+    >
+        <EditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:hint="Confirm"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textCursorDrawable="@null"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorAccent"
+                android:fontFamily="@font/font_for_app"
+        />
+
+    </com.github.florent37.materialtextfield.MaterialTextField>
+
+    <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            style="@style/button"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/signin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <io.ghyeok.stickyswitch.widget.StickySwitch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:ss_leftIcon="@mipmap/player"
+            app:ss_rightIcon="@mipmap/admin"
+            android:layout_marginTop="16dp"
+            style="@style/switchStyle"
+            app:ss_leftText="@string/player"
+            app:ss_rightText="@string/admin"
+            app:ss_textSize="14sp"
+            app:ss_iconSize="22dp"
+            app:ss_animationDuration="500"
+            app:ss_selectedTextSize="14sp"
+            app:ss_sliderBackgroundColor="@color/colorPrimary"
+            app:ss_switchColor="@color/colorAccent"
+            android:id="@+id/stickySwitch"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

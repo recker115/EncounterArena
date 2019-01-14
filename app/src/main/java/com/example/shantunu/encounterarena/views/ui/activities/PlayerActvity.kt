@@ -36,7 +36,6 @@ class PlayerActvity : AppCompatActivity() {
                 R.id.notifications -> navigateToFragment(Notifications())
                 R.id.myprofile -> navigateToFragment(MyProfile())
             }
-
             true
         }
     }

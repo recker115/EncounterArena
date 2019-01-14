@@ -6,6 +6,11 @@
     <string name="date">Date</string>
     <string name="max_players">Max Players</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="admin">Admin</string>
+    <string name="partner">Partner</string>
+    <string name="user">User</string>
+    <string name="player">Player</string>
+    <string name="signup">Sign Up</string>
+    <string name="signin">Sign In</string>
 </resources>

@@ -17,5 +17,7 @@ class Constants {
         const val ID = "Id"
         const val PASSWORD = "Password"
         const val IS_ROOM_CREATED = "IsCreated"
+        const val USERS: String = "Users"
+        const val EMAIL: String = "Email"
     }
 }
