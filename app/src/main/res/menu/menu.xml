@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/tournaments"
+        android:icon="@mipmap/tournament"
+        android:title="Tournaments"
+        />
+    <item
+        android:id="@+id/notifications"
+        android:icon="@mipmap/notification"
+        android:title="Notifications"
+        />
+    <item
+        android:id="@+id/myprofile"
+        android:icon="@mipmap/profile"
+        android:title="My Profile"
+        />
+</menu>

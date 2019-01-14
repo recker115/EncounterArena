@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "271535150648",
+    "firebase_url": "https://encounterarena.firebaseio.com",
+    "project_id": "encounterarena",
+    "storage_bucket": "encounterarena.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271535150648:android:594e31bc25c80dbb",
+        "android_client_info": {
+          "package_name": "com.example.shantunu.encounterarena"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "271535150648-kblnbs4vhba1fbtjfhcqaufef4ruh064.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shantunu.encounterarena",
+            "certificate_hash": "d4cc72ced6a45cfa5a31b42e1f62f3b88a61bcea"
+          }
+        },
+        {
+          "client_id": "271535150648-g6s0tm4h3qn94vjc0ri2h6823u0rpqu0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsd2X_GNhvrSknxTyb6NUSGktTk1De8Lc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "271535150648-g6s0tm4h3qn94vjc0ri2h6823u0rpqu0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
