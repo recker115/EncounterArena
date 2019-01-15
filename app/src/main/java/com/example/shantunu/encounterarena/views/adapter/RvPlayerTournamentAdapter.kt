@@ -16,7 +16,8 @@ import com.example.shantunu.encounterarena.views.viewHolders.TournyPlayerViewHol
 import com.example.shantunu.encounterarena.views.viewHolders.TournyViewHolder
 import com.google.android.material.textfield.TextInputEditText
 
-class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableList<Tournament>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableList<Tournament>,
+                                val curUserId : String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val TYPE_PLACEHOLDER = 1
     val TYPE_ITEM = 0
@@ -50,23 +51,26 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
             holder.tvMap.text = tournament.map
 
             tournament.maxPlayers?.toInt()?.let { holder.pbPlayersJoined.max = it }
-            tournament.playersJoined?.toInt()?.let {
-                holder.pbPlayersJoined.progress = it
-                holder.tvPlayersJoined.text = it.toString() + " / " + tournament.maxPlayers + " have joined"
-            }
+
+            holder.pbPlayersJoined.progress = tournament.playersJoined.toInt()
+            holder.tvPlayersJoined.text = tournament.playersJoined + " / " + tournament.maxPlayers + " have joined"
+
             tournament.timeStamp?.let { holder.tvTimeStamp.text = Utils.getAppDate(it) }
 
-            /*tournament.isRoomCreated?.let {
-                if (it.equals("true", true)) {
-                    holder.btnAddRoom.visibility = View.GONE
-                }
-                else {
-                    holder.btnAddRoom.visibility = View.VISIBLE
-                }
-            }*/
+            if (tournament.isCurrentUserJoined)
+                holder.btnJoin.visibility = View.GONE
+            else
+                holder.btnJoin.visibility = View.VISIBLE
 
             holder.btnJoin.setOnClickListener {
                // perform join
+                it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
+                    ?.child(tournament.id)?.child(Constants.PLAYERS_JOINED)?.setValue((tournament.playersJoined.toInt()+1).toString())
+
+                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(tournament.id)
+                    ?.child(Constants.USERS_JOINED)
+                    ?.push()?.child(Constants.ID)?.setValue(curUserId)
             }
         }
 

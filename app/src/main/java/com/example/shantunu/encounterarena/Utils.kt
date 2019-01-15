@@ -7,6 +7,8 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -50,6 +52,10 @@ class Utils {
             var date = Date(strEpoc.toLong())
             var simpleDateFortmat = SimpleDateFormat("dd MMMM yyyy hh:mm aa")
             return simpleDateFortmat.format(date)
+        }
+
+        fun getCurrentUser(): FirebaseUser? {
+            return FirebaseAuth.getInstance().currentUser
         }
     }
 }

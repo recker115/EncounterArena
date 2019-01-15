@@ -11,6 +11,9 @@
     <string name="partner">Partner</string>
     <string name="user">User</string>
     <string name="player">Player</string>
-    <string name="signup">Sign Up</string>
-    <string name="signin">Sign In</string>
+    <string name="signup">Sign Up ? Click here</string>
+    <string name="signin">Sign In ? Click here</string>
+    <string name="add_money">Add Money</string>
+    <string name="only_signup">Sign Up</string>
+    <string name="only_signin">Sign In</string>
 </resources>

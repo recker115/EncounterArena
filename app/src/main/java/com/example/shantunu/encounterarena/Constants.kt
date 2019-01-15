@@ -19,5 +19,8 @@ class Constants {
         const val IS_ROOM_CREATED = "IsCreated"
         const val USERS: String = "Users"
         const val EMAIL: String = "Email"
+        const val APP_SHARED_PREF: String = "SHARED PREFS"
+        const val IS_ADMIN: String = "Is Admin"
+        const val USERS_JOINED: String = "Users Joined"
     }
 }

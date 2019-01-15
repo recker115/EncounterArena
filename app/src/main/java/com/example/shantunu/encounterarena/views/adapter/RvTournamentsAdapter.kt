@@ -49,10 +49,10 @@ class RvTournamentsAdapter(val context: Context, val tournaments : MutableList<T
             holder.tvMap.text = tournament.map
 
             tournament.maxPlayers?.toInt()?.let { holder.pbPlayersJoined.max = it }
-            tournament.playersJoined?.toInt()?.let {
-                holder.pbPlayersJoined.progress = it
-                holder.tvPlayersJoined.text = it.toString() + " / " + tournament.maxPlayers + " have joined"
-            }
+
+            holder.pbPlayersJoined.progress = tournament.playersJoined.toInt()
+            holder.tvPlayersJoined.text = tournament.playersJoined.toString() + " / " + tournament.maxPlayers + " have joined"
+
             tournament.timeStamp?.let { holder.tvTimeStamp.text = Utils.getAppDate(it) }
 
             tournament.isRoomCreated?.let {
