@@ -16,4 +16,6 @@
     <string name="add_money">Add Money</string>
     <string name="only_signup">Sign Up</string>
     <string name="only_signin">Sign In</string>
+    <string name="new_player">New Player</string>
+    <string name="pubg_id">PUBG ID</string>
 </resources>

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shantunu.encounterarena.AppClass
 import com.example.shantunu.encounterarena.Constants
@@ -13,8 +14,9 @@ import com.example.shantunu.encounterarena.Utils
 import com.example.shantunu.encounterarena.firebaseModels.Tournament
 import com.example.shantunu.encounterarena.views.viewHolders.PlaceHolder
 import com.example.shantunu.encounterarena.views.viewHolders.TournyPlayerViewHolder
-import com.example.shantunu.encounterarena.views.viewHolders.TournyViewHolder
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.iid.FirebaseInstanceId
+import java.util.LinkedHashMap
 
 class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableList<Tournament>,
                                 val curUserId : String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -57,22 +59,65 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
 
             tournament.timeStamp?.let { holder.tvTimeStamp.text = Utils.getAppDate(it) }
 
-            if (tournament.isCurrentUserJoined)
+            if (tournament.isCurrentUserJoined) {
                 holder.btnJoin.visibility = View.GONE
-            else
+                holder.ivJoined.visibility = View.VISIBLE
+                holder.tvJoined.visibility = View.VISIBLE
+
+            }
+            else {
                 holder.btnJoin.visibility = View.VISIBLE
+                holder.ivJoined.visibility = View.GONE
+                holder.tvJoined.visibility = View.GONE
+            }
 
             holder.btnJoin.setOnClickListener {
                // perform join
                 it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
-                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
-                    ?.child(tournament.id)?.child(Constants.PLAYERS_JOINED)?.setValue((tournament.playersJoined.toInt()+1).toString())
-
-                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(tournament.id)
-                    ?.child(Constants.USERS_JOINED)
-                    ?.push()?.child(Constants.ID)?.setValue(curUserId)
+                showAddPUBGIDdialog(tournament)
             }
         }
+
+    }
+
+    private fun showAddPUBGIDdialog(tournament : Tournament) {
+        val dialogAddId = Utils.getDialog(context, R.layout.dialog_pubg_id)
+        val etPubGid = dialogAddId.findViewById<View>(R.id.etPubGId) as TextInputEditText
+        val btnSetId = dialogAddId.findViewById<View>(R.id.btnAddPubgId) as Button
+
+        btnSetId.setOnClickListener{
+            it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+            if (etPubGid.text.toString().isEmpty()) {
+                etPubGid.error = "Fill it to join"
+            }
+            else {
+                dialogAddId.dismiss()
+
+                if (tournament.playersJoined.toInt() <= tournament.maxPlayers?.toInt()!!) {
+                    AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
+                        ?.child(tournament.id)?.child(Constants.PLAYERS_JOINED)?.setValue((tournament.playersJoined.toInt()+1).toString())
+
+                    FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { token ->
+                        run {
+                            val strToken = token.token
+
+                            var userJoinedMap : LinkedHashMap<String, String> = LinkedHashMap()
+                            userJoinedMap[Constants.ID] = curUserId
+                            userJoinedMap[Constants.PUBG_ID] = etPubGid.text.toString()
+                            userJoinedMap[Constants.FCM_TOKEN] = strToken
+
+                            AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
+                                ?.child(tournament.id)
+                                ?.child(Constants.USERS_JOINED)
+                                ?.push()?.setValue(userJoinedMap)
+                        }
+                    }   
+                }
+
+            }
+        }
+
+        dialogAddId.show()
 
     }
 

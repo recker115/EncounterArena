@@ -96,6 +96,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:visibility="gone"
             android:fontFamily="@font/font_for_app">
         <EditText
                 android:id="@+id/etConfirmPassword"
@@ -124,7 +125,7 @@
             style="@style/button"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/only_signup"
+            android:text="@string/only_signin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
@@ -136,11 +137,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:ss_leftIcon="@mipmap/player"
-            app:ss_rightIcon="@mipmap/admin"
+            app:ss_rightIcon="@mipmap/new_user"
             android:layout_marginTop="16dp"
             style="@style/switchStyle"
             app:ss_leftText="@string/player"
-            app:ss_rightText="@string/admin"
+            app:ss_rightText="@string/new_player"
             app:ss_textSize="14sp"
             app:ss_iconSize="22dp"
             app:ss_animationDuration="500"
@@ -148,15 +149,5 @@
             app:ss_sliderBackgroundColor="@color/colorPrimary"
             app:ss_switchColor="@color/colorAccent"
             android:id="@+id/stickySwitch"/>
-    <TextView
-            android:text="Sign In ? Click here"
-            style="@style/normal"
-            android:textColor="#fff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tvIsSignUp"
-            android:padding="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/confirmPassword" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" android:layout_marginRight="16dp" android:layout_marginTop="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

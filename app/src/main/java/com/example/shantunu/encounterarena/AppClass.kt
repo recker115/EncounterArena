@@ -9,6 +9,7 @@ class AppClass : Application() {
 
     var mRealTimeDatabase : DatabaseReference ?= null
     var mFirebaseAuth : FirebaseAuth ?= null
+    var currentUuId : String = ""
 
     override fun onCreate() {
         super.onCreate()
@@ -18,6 +19,7 @@ class AppClass : Application() {
     private fun init() {
         mRealTimeDatabase = FirebaseDatabase.getInstance().reference
         APPINSTANCE = this
+        currentUuId = getFirebaseAuth().currentUser?.uid.toString()
     }
 
     fun getRealTimeDatabase() : DatabaseReference {

@@ -22,5 +22,8 @@ class Constants {
         const val APP_SHARED_PREF: String = "SHARED PREFS"
         const val IS_ADMIN: String = "Is Admin"
         const val USERS_JOINED: String = "Users Joined"
+        const val UUID: String = "User Id"
+        const val FCM_TOKEN: String ="FCM TOKEN"
+        const val PUBG_ID: String = "Pubg Id"
     }
 }

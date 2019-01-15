@@ -10,4 +10,6 @@
     <color name="yellow">#FFA500</color>
     <color name="dark_grey">#696969</color>
     <color name="trans_black">#B3000000</color>
+    <color name="start_app_dialog">#360033</color>
+    <color name="end_app_dialog">#0b8793</color>
 </resources>
