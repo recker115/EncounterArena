@@ -111,7 +111,7 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
                                 ?.child(Constants.USERS_JOINED)
                                 ?.push()?.setValue(userJoinedMap)
                         }
-                    }   
+                    }
                 }
 
             }

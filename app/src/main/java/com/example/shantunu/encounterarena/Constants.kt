@@ -25,5 +25,6 @@ class Constants {
         const val UUID: String = "User Id"
         const val FCM_TOKEN: String ="FCM TOKEN"
         const val PUBG_ID: String = "Pubg Id"
+        const val NOTIFICATION_ROOM: Int = 100203
     }
 }
