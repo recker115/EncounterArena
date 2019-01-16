@@ -10,10 +10,14 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".views.ui.activities.TournamentDetails"
+                  android:theme="@style/AppTheme.NoActionBar"
+        >
+        </activity>
 
         <service android:name=".fcm.FcmService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
@@ -25,28 +29,32 @@
                 android:name=".views.ui.activities.Login"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter android:label="@string/filter_title_pubg">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
-                <data android:scheme="http"
-                      android:host="www.example.com"
-                      android:pathPrefix="/Encounter" />
-                <!-- note that the leading "/" is required for pathPrefix-->
-                <!-- Accepts URIs that begin with "example://gizmos” -->
-                <data android:scheme="example"
-                      android:host="pubg" />
+                <action android:name="android.intent.action.VIEW"/>
 
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data
+                        android:host="www.example.com"
+                        android:pathPrefix="/Encounter"
+                        android:scheme="http"/>
+                <!-- note that the leading "/" is required for pathPrefix -->
+                <!-- Accepts URIs that begin with "example://gizmos” -->
+                <data
+                        android:host="pubg"
+                        android:scheme="example"/>
             </intent-filter>
         </activity>
         <activity
                 android:name=".views.ui.activities.PlayerActvity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".views.ui.activities.Splash"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+                android:name=".views.ui.activities.Splash"
+                android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>

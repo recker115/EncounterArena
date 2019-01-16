@@ -1,6 +1,7 @@
 package com.example.shantunu.encounterarena.views.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.example.shantunu.encounterarena.Constants
 import com.example.shantunu.encounterarena.R
 import com.example.shantunu.encounterarena.Utils
 import com.example.shantunu.encounterarena.firebaseModels.Tournament
+import com.example.shantunu.encounterarena.views.ui.activities.TournamentDetails
 import com.example.shantunu.encounterarena.views.viewHolders.PlaceHolder
 import com.example.shantunu.encounterarena.views.viewHolders.TournyPlayerViewHolder
 import com.google.android.material.textfield.TextInputEditText
@@ -75,6 +77,15 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
                // perform join
                 it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
                 showAddPUBGIDdialog(tournament)
+            }
+
+            holder.vRoot.setOnClickListener{
+                it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+                if (tournament.isCurrentUserJoined) {
+                    var intent = Intent(context, TournamentDetails::class.java)
+                    intent.putExtra(Constants.ID, tournament.id)
+                    context.startActivity(intent)
+                }
             }
         }
 

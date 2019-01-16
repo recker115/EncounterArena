@@ -22,4 +22,5 @@ class TournyPlayerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     var btnJoin : Button = itemView.findViewById(R.id.btnJoin)
     var tvJoined : TextView = itemView.findViewById(R.id.tvJoined)
     var ivJoined : ImageView = itemView.findViewById(R.id.ivJoined)
+    var vRoot : View = itemView.findViewById(R.id.vRoot)
 }

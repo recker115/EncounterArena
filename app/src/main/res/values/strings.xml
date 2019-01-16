@@ -19,4 +19,5 @@
     <string name="new_player">New Player</string>
     <string name="pubg_id">PUBG ID</string>
     <string name="filter_title_pubg">PubG Money Room</string>
+    <string name="Rs">\u20B9</string>
 </resources>
