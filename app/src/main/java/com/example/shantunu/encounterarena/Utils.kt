@@ -6,9 +6,13 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
+import kotlinx.android.synthetic.main.activity_splash.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -57,5 +61,14 @@ class Utils {
         fun getCurrentUser(): FirebaseUser? {
             return FirebaseAuth.getInstance().currentUser
         }
+
+        fun showProgressBar(progressBar : ProgressBar, loadingView : View, context: Context) {
+            loadingView.visibility = View.VISIBLE
+            progressBar.indeterminateDrawable = FoldingCirclesDrawable.Builder(context).build()
+        }
+        fun hideProgressBar(loadingView : View) {
+            loadingView.visibility = View.GONE
+        }
+
     }
 }

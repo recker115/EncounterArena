@@ -27,7 +27,7 @@ class PlayerActvity : AppCompatActivity() {
     private fun initMembers() {
         title = "Players"
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         navigateToFragment(PlayerTournaments())
         setBottomNavigations()

@@ -24,6 +24,20 @@
         <activity
                 android:name=".views.ui.activities.Login"
                 android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter android:label="@string/filter_title_pubg">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data android:scheme="http"
+                      android:host="www.example.com"
+                      android:pathPrefix="/Encounter" />
+                <!-- note that the leading "/" is required for pathPrefix-->
+                <!-- Accepts URIs that begin with "example://gizmos” -->
+                <data android:scheme="example"
+                      android:host="pubg" />
+
+            </intent-filter>
         </activity>
         <activity
                 android:name=".views.ui.activities.PlayerActvity"

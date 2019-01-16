@@ -29,6 +29,11 @@ class MyProfile : Fragment() {
     }
 
     private fun initMembers() {
+
+        activity?.let {
+            it.title = "Notifications"
+        }
+
         folding_cell.setOnClickListener {
             folding_cell.toggle(false)
         }

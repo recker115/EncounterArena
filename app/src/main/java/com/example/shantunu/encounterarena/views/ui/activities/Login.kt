@@ -8,9 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.shantunu.encounterarena.AppClass
 import com.example.shantunu.encounterarena.Constants
 import com.example.shantunu.encounterarena.R
+import com.example.shantunu.encounterarena.Utils
 import com.google.firebase.database.DatabaseReference
+import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
 import io.ghyeok.stickyswitch.widget.StickySwitch
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.loading_view.*
 
 class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
 
@@ -40,6 +43,8 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
     }
 
     private fun processLogin() {
+        Utils.showProgressBar(pbMain, loadingView, this)
+        pbMain.indeterminateDrawable = FoldingCirclesDrawable.Builder(this).build()
         if (isSignUp) {
             createNewUser()
         } else {
@@ -51,6 +56,8 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
         AppClass.getAppInstance()?.getFirebaseAuth()?.signInWithEmailAndPassword(etEmail.text.toString(),
             etPassword.text.toString())?.addOnCompleteListener { task2 ->
             run {
+
+                Utils.hideProgressBar(loadingView)
                 if (task2.isSuccessful) {
                     startActivity(Intent(this@Login, PlayerActvity::class.java))
                     finish()
@@ -67,6 +74,9 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
         AppClass.getAppInstance()?.getFirebaseAuth()?.createUserWithEmailAndPassword(etEmail.text.toString(),
             etPassword.text.toString())?.addOnCompleteListener { task2 ->
             run {
+
+                Utils.hideProgressBar(loadingView)
+
                 if (task2.isSuccessful) {
                     var uuId = AppClass.getAppInstance()?.getFirebaseAuth()?.currentUser?.uid
                     uuId?.let {
