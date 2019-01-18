@@ -6,6 +6,16 @@
         android:title="Tournaments"
         />
     <item
+        android:id="@+id/ongoing"
+        android:icon="@mipmap/ongoing"
+        android:title="On Going"
+        />
+    <item
+        android:id="@+id/results"
+        android:icon="@mipmap/results"
+        android:title="Results"
+        />
+    <item
         android:id="@+id/notifications"
         android:icon="@mipmap/notification"
         android:title="Notifications"

@@ -67,7 +67,6 @@ class AdminAddRoom : AppCompatActivity() {
     internal val date : DatePickerDialog.OnDateSetListener = DatePickerDialog.OnDateSetListener {
             _, year, monthOfYear, dayOfMonth ->
         run {
-
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, monthOfYear)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -136,6 +135,7 @@ class AdminAddRoom : AppCompatActivity() {
                 for (currTournament in tournaments) {
                     if (tournament.id == currTournament.id) {
                         currTournament.isRoomCreated = tournament.isRoomCreated
+                        currTournament.youtubeLink = tournament.youtubeLink
                     }
                 }
 

@@ -2,6 +2,7 @@ package com.example.shantunu.encounterarena.views.viewHolders
 
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,4 +20,6 @@ class TournyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var tvMap : TextView = itemView.findViewById(R.id.tvMap)
     var tvPlayersJoined : TextView = itemView.findViewById(R.id.tvPlayersFilled)
     var btnAddRoom : Button = itemView.findViewById(R.id.btnAddRoom)
+    var ivYoutubeLink : ImageView = itemView.findViewById(R.id.ivYouLink)
+    var ivYoutube : ImageView = itemView.findViewById(R.id.ivYoutube)
 }

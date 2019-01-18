@@ -65,7 +65,7 @@ class RvTournamentsAdapter(val context: Context, val tournaments : MutableList<T
             }
 
             holder.btnAddRoom.setOnClickListener {
-//                it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.))
+                it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
                 val dialogCreateRoom = Utils.getDialog(context, R.layout.dialog_add_room)
                 val etRoomId = dialogCreateRoom.findViewById<View>(R.id.etRoomId) as TextInputEditText
                 val etPassword = dialogCreateRoom.findViewById<View>(R.id.etPassword) as TextInputEditText
@@ -91,14 +91,48 @@ class RvTournamentsAdapter(val context: Context, val tournaments : MutableList<T
                     }
                 }
             }
+
+            if (tournament.youtubeLink.isEmpty()){
+                holder.ivYoutubeLink.visibility = View.VISIBLE
+                holder.ivYoutube.visibility = View.GONE
+            }
+            else {
+                holder.ivYoutubeLink.visibility = View.GONE
+                holder.ivYoutube.visibility = View.VISIBLE
+            }
+
+            holder.ivYoutubeLink.setOnClickListener{
+                it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+                val dialogSetYoutubeLink = Utils.getDialog(context, R.layout.dialog_add_link)
+                val etLink = dialogSetYoutubeLink.findViewById<View>(R.id.etLink) as TextInputEditText
+
+                val btnSetLink = dialogSetYoutubeLink.findViewById<View>(R.id.btnAddLink)
+                dialogSetYoutubeLink.show()
+
+                btnSetLink.setOnClickListener{ buttons->
+                    buttons.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+                    when {
+                        etLink.text.toString().isEmpty() -> etLink.error = "Fill it"
+
+                        else-> {
+                            dialogSetYoutubeLink.dismiss()
+                            tournament.id.let { it1 ->
+                                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(it1)
+                                    ?.child(Constants.YOUTUBE_LINK)?.setValue(etLink.text.toString())
+                                notifyDataSetChanged()
+                            }
+                        }
+                    }
+                }
+            }
         }
 
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (tournaments[position].name == null) {
+        return if (tournaments[position].name == null)
             TYPE_PLACEHOLDER
-        } else
+        else
             TYPE_ITEM
     }
 

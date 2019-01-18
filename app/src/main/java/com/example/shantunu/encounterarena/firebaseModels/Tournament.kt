@@ -6,7 +6,8 @@ import com.google.firebase.database.PropertyName
 class Tournament(@get:PropertyName(Constants.WINS_AMT) @set:PropertyName(Constants.WINS_AMT) var winPrice: String = "",
                  @get:PropertyName(Constants.IS_ROOM_CREATED) @set:PropertyName(Constants.IS_ROOM_CREATED) var isRoomCreated: String = "",
                  @get:PropertyName(Constants.ID) @set:PropertyName(Constants.ID) var id: String = "",
-                 @get:PropertyName(Constants.PLAYERS_JOINED) @set:PropertyName(Constants.PLAYERS_JOINED) var playersJoined: String = "0") {
+                 @get:PropertyName(Constants.PLAYERS_JOINED) @set:PropertyName(Constants.PLAYERS_JOINED) var playersJoined: String = "0",
+                 @get:PropertyName(Constants.YOUTUBE_LINK) @set:PropertyName(Constants.YOUTUBE_LINK) var youtubeLink: String = "") {
 
     @PropertyName(Constants.TOURNY_NAME)
     var name : String ?= null
@@ -27,7 +28,6 @@ class Tournament(@get:PropertyName(Constants.WINS_AMT) @set:PropertyName(Constan
     @PropertyName(Constants.MAX_PLAYERS)
     var maxPlayers : String ?= null
 
-    var listOfUsersJoined : MutableList<User> = mutableListOf()
     var isCurrentUserJoined : Boolean = false
 
 }
