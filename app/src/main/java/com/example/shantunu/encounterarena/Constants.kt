@@ -27,5 +27,6 @@ class Constants {
         const val PUBG_ID: String = "Pubg Id"
         const val NOTIFICATION_ROOM: Int = 100203
         const val YOUTUBE_LINK : String = "Youtube Link"
+        const val DATABASE_NAME: String = "appDatabase_db"
     }
 }

@@ -10,8 +10,8 @@ import com.example.shantunu.encounterarena.AppClass
 import com.example.shantunu.encounterarena.Constants
 import com.example.shantunu.encounterarena.R
 import com.example.shantunu.encounterarena.Utils
-import com.example.shantunu.encounterarena.firebaseModels.Tournament
-import com.example.shantunu.encounterarena.firebaseModels.User
+import com.example.shantunu.encounterarena.models.Tournament
+import com.example.shantunu.encounterarena.models.User
 import com.example.shantunu.encounterarena.views.adapter.RvPlayerTournamentAdapter
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot

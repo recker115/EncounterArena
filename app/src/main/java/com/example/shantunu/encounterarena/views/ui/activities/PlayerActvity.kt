@@ -12,7 +12,7 @@ import com.example.shantunu.encounterarena.views.ui.fragments.Notifications
 import com.example.shantunu.encounterarena.views.ui.fragments.PlayerTournaments
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_player_actvity.*
-import kotlinx.android.synthetic.main.app_bar_layout.*
+import kotlinx.android.synthetic.main.collapsing_toolbar.*
 
 class PlayerActvity : AppCompatActivity() {
 

@@ -10,7 +10,7 @@ import com.example.shantunu.encounterarena.AppClass
 import com.example.shantunu.encounterarena.Constants
 import com.example.shantunu.encounterarena.R
 import com.example.shantunu.encounterarena.Utils
-import com.example.shantunu.encounterarena.firebaseModels.Tournament
+import com.example.shantunu.encounterarena.models.Tournament
 import com.example.shantunu.encounterarena.views.viewHolders.PlaceHolder
 import com.example.shantunu.encounterarena.views.viewHolders.TournyViewHolder
 import com.google.android.material.textfield.TextInputEditText
@@ -55,14 +55,13 @@ class RvTournamentsAdapter(val context: Context, val tournaments : MutableList<T
 
             tournament.timeStamp?.let { holder.tvTimeStamp.text = Utils.getAppDate(it) }
 
-            tournament.isRoomCreated?.let {
-                if (it.equals("true", true)) {
-                    holder.btnAddRoom.visibility = View.GONE
-                }
-                else {
-                    holder.btnAddRoom.visibility = View.VISIBLE
-                }
+            if (tournament.isRoomCreated.equals("true", true)) {
+                holder.btnAddRoom.visibility = View.GONE
             }
+            else {
+                holder.btnAddRoom.visibility = View.VISIBLE
+            }
+
 
             holder.btnAddRoom.setOnClickListener {
                 it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))

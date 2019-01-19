@@ -5,8 +5,10 @@
              android:layout_height="match_parent"
              tools:context=".views.ui.fragments.Notifications">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="No notifications"/>
+            android:id="@+id/rvNotifications"
+            tools:listitem="@layout/notification_item"
+            android:padding="5dp"/>
 </FrameLayout>

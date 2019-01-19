@@ -11,20 +11,27 @@ import androidx.core.app.NotificationCompat
 import com.example.shantunu.encounterarena.AppClass
 import com.example.shantunu.encounterarena.Constants
 import com.example.shantunu.encounterarena.R
+import com.example.shantunu.encounterarena.models.EachNotification
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class FcmService : FirebaseMessagingService() {
+class FcmService : FirebaseMessagingService(), CoroutineScope {
+
+    private val fcmJob : Job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + fcmJob
+
     private var notificationBuilder: NotificationCompat.Builder ?= null
     private var notificationManager: NotificationManager? = null
     private var largeBitmap: Bitmap? = null
+
     override fun onMessageReceived(p0: RemoteMessage?) {
         super.onMessageReceived(p0)
-//        Log.d( "From: " + p0?.from)
-//        Log.d( "From: " + p0.getFrom())
-        // Check if message contains a data payload.
+
         p0?.let {
-//            if (p0.data.isNotEmpty()) {
                 largeBitmap = BitmapFactory.decodeResource(
                     this.resources,
                     R.mipmap.rifle_colored
@@ -32,15 +39,28 @@ class FcmService : FirebaseMessagingService() {
                 if (p0.data["type"].equals("room", ignoreCase = true)) run {
                     val title = p0.data["noti_title"]
                     val body = "Room Id- " + p0.data["RoomId"] + "\n" + "Password :- " +  p0.data["Password"]
+                    val type = p0.data["type"]
 
                     Log.e("RoomId",  p0.data["RoomId"])
                     Log.e("Password",  p0.data["Password"])
 
                     initNotification(title, body)
                     notifyRoomId()
+                    storeNotification(title,p0.data["RoomId"], p0.data["Password"] , type)
 //                }
             }
         }
+    }
+
+    private fun storeNotification(title: String?, roomId: String? , password : String? , type : String?){
+        val eachNotification = EachNotification(title = title, password = password,
+            time = System.currentTimeMillis(), type = type, roomId = roomId)
+
+        launch { performStore(eachNotification) }
+    }
+
+    private suspend fun performStore(eachNotification: EachNotification){
+        withContext(Dispatchers.Default) { AppClass.getAppInstance()?.appDatabase?.getNotificationDao()?.insertNotification(eachNotification) }
     }
 
     override fun onNewToken(p0: String?) {
@@ -102,5 +122,10 @@ class FcmService : FirebaseMessagingService() {
     private fun notifyRoomId() {
 //        notificationBuilder.setContentIntent(notifyPendingIntent)
         notificationManager?.notify(Constants.NOTIFICATION_ROOM, notificationBuilder?.build())
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        fcmJob.cancel()
     }
 }

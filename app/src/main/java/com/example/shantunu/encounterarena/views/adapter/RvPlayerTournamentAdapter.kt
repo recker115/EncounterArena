@@ -12,7 +12,7 @@ import com.example.shantunu.encounterarena.AppClass
 import com.example.shantunu.encounterarena.Constants
 import com.example.shantunu.encounterarena.R
 import com.example.shantunu.encounterarena.Utils
-import com.example.shantunu.encounterarena.firebaseModels.Tournament
+import com.example.shantunu.encounterarena.models.Tournament
 import com.example.shantunu.encounterarena.views.ui.activities.TournamentDetails
 import com.example.shantunu.encounterarena.views.viewHolders.PlaceHolder
 import com.example.shantunu.encounterarena.views.viewHolders.TournyPlayerViewHolder

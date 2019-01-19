@@ -1,4 +1,4 @@
-package com.example.shantunu.encounterarena.firebaseModels
+package com.example.shantunu.encounterarena.models
 
 import com.example.shantunu.encounterarena.Constants
 import com.google.firebase.database.PropertyName
