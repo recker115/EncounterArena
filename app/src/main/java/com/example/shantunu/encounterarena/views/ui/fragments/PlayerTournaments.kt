@@ -69,21 +69,22 @@ class PlayerTournaments : Fragment() {
                 var tournament = p0.getValue(Tournament::class.java) as Tournament
 
 //                var usersJoined = mutableListOf<User>()
-                for (eachSnapshot in p0.child(Constants.USERS_JOINED).children) {
-                    var user = eachSnapshot.getValue(User::class.java) as User
+                    for (eachSnapshot in p0.child(Constants.USERS_JOINED).children) {
+                        var user = eachSnapshot.getValue(User::class.java) as User
 //                    usersJoined.add(user)
-                    if (user.id == currUserID)
-                        tournament.isCurrentUserJoined = true
-                }
-
-                for (currTournament in tournaments) {
-                    if (tournament.id == currTournament.id) {
-                        currTournament.isRoomCreated = tournament.isRoomCreated
-                        currTournament.playersJoined = tournament.playersJoined
-//                        currTournament.listOfUsersJoined = usersJoined
-                        currTournament.isCurrentUserJoined = tournament.isCurrentUserJoined
+                        if (user.id == currUserID)
+                            tournament.isCurrentUserJoined = true
                     }
-                }
+
+                    for (currTournament in tournaments) {
+                        if (tournament.id == currTournament.id) {
+                            currTournament.isRoomCreated = tournament.isRoomCreated
+                            currTournament.playersJoined = tournament.playersJoined
+//                        currTournament.listOfUsersJoined = usersJoined
+                            currTournament.isCurrentUserJoined = tournament.isCurrentUserJoined
+                        }
+                    }
+
 
                 rvTournamentPlayerAdapter?.notifyDataSetChanged()
             }
@@ -113,6 +114,13 @@ class PlayerTournaments : Fragment() {
 
             override fun onChildRemoved(p0: DataSnapshot) {
                 var tournament = p0.getValue(Tournament::class.java) as Tournament
+
+                for (currTournament in tournaments) {
+                    if (tournament.id == currTournament.id) {
+                        tournament = currTournament
+                    }
+                }
+
                 tournaments.remove(tournament)
                 rvTournamentPlayerAdapter?.notifyDataSetChanged()
             }

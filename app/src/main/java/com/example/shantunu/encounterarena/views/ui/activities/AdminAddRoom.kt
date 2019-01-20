@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.MenuItem
@@ -23,7 +24,7 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import kotlinx.android.synthetic.main.activity_admin_add_room.*
-import kotlinx.android.synthetic.main.app_bar_layout.*
+import kotlinx.android.synthetic.main.collapsing_toolbar.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.LinkedHashMap
@@ -98,6 +99,9 @@ class AdminAddRoom : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_add_room)
 
+        vSwitch.setOnClickListener{
+            startActivity(Intent(this@AdminAddRoom, PlayerActvity::class.java))
+        }
         initMembers()
     }
 
@@ -132,10 +136,17 @@ class AdminAddRoom : AppCompatActivity() {
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
                 var tournament = p0.getValue(Tournament::class.java) as Tournament
 
-                for (currTournament in tournaments) {
-                    if (tournament.id == currTournament.id) {
-                        currTournament.isRoomCreated = tournament.isRoomCreated
-                        currTournament.youtubeLink = tournament.youtubeLink
+                if (tournament.isOngoing) {
+                    AppClass.APPINSTANCE?.getRealTimeDatabase()?.child(Constants.ONGOING)
+                        ?.child(p0.key.toString())?.setValue(p0.value)
+                    AppClass.APPINSTANCE?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(tournament.id)?.removeValue()
+                }
+                else {
+                    for (currTournament in tournaments) {
+                        if (tournament.id == currTournament.id) {
+                            currTournament.isRoomCreated = tournament.isRoomCreated
+                            currTournament.youtubeLink = tournament.youtubeLink
+                        }
                     }
                 }
 
@@ -157,6 +168,13 @@ class AdminAddRoom : AppCompatActivity() {
 
             override fun onChildRemoved(p0: DataSnapshot) {
                 var tournament = p0.getValue(Tournament::class.java) as Tournament
+
+                for (currTournament in tournaments) {
+                    if (tournament.id == currTournament.id) {
+                        tournament = currTournament
+                    }
+                }
+
                 tournaments.remove(tournament)
                 rvTournyAdapter?.notifyDataSetChanged()
             }
@@ -243,13 +261,13 @@ class AdminAddRoom : AppCompatActivity() {
             etDate?.text.toString().isEmpty() -> etDate?.error = "Fill it"
             etMaxPlayers?.text.toString().isEmpty() -> etMaxPlayers?.error = "Fill it"
             else -> {
-                processLogin()
+                processAddTourny()
                 dialogAdd?.dismiss()
             }
         }
     }
 
-    private fun processLogin() {
+    private fun processAddTourny() {
         var databaseRefTournaments = AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
 
         val tournyFields = LinkedHashMap<String, String>()

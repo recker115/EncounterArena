@@ -68,7 +68,11 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
 
             }
             else {
-                holder.btnJoin.visibility = View.VISIBLE
+                if (tournament.isOngoing) {
+                    holder.btnJoin.visibility = View.GONE
+                } else {
+                    holder.btnJoin.visibility = View.VISIBLE
+                }
                 holder.ivJoined.visibility = View.GONE
                 holder.tvJoined.visibility = View.GONE
             }

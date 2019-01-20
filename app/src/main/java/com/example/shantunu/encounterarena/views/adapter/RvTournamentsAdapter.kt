@@ -77,18 +77,24 @@ class RvTournamentsAdapter(val context: Context, val tournaments : MutableList<T
                         etPassword.text.toString().isEmpty() -> etPassword.error = "Fill it"
                         else-> {
                             dialogCreateRoom.dismiss()
-                            tournament.id.let { it1 ->
-                                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(it1)
-                                    ?.child(Constants.ROOM_ID)?.setValue(etRoomId.text.toString())
-                                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(it1)
-                                    ?.child(Constants.PASSWORD)?.setValue(etPassword.text.toString())
-                                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(it1)
-                                    ?.child(Constants.IS_ROOM_CREATED)?.setValue("true")
-                                notifyDataSetChanged()
-                            }
+
+                            AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(tournament.id)
+                                ?.child(Constants.ROOM_ID)?.setValue(etRoomId.text.toString())
+                            AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(tournament.id)
+                                ?.child(Constants.PASSWORD)?.setValue(etPassword.text.toString())
+                            AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(tournament.id)
+                                ?.child(Constants.IS_ROOM_CREATED)?.setValue("true")
+                            notifyDataSetChanged()
+
                         }
                     }
                 }
+            }
+
+            holder.ivAdminOngoing.setOnClickListener{
+                it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(tournament.id)
+                    ?.child(Constants.IS_ONGOING)?.setValue(true)
             }
 
             if (tournament.youtubeLink.isEmpty()){

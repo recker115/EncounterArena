@@ -28,5 +28,7 @@ class Constants {
         const val NOTIFICATION_ROOM: Int = 100203
         const val YOUTUBE_LINK : String = "Youtube Link"
         const val DATABASE_NAME: String = "appDatabase_db"
+        const val ONGOING : String = "OnGoing"
+        const val IS_ONGOING : String = "IsOnGoing"
     }
 }

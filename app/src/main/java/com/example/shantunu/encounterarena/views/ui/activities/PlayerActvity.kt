@@ -9,6 +9,7 @@ import com.example.shantunu.encounterarena.Constants
 import com.example.shantunu.encounterarena.R
 import com.example.shantunu.encounterarena.views.ui.fragments.MyProfile
 import com.example.shantunu.encounterarena.views.ui.fragments.Notifications
+import com.example.shantunu.encounterarena.views.ui.fragments.OngoingFragment
 import com.example.shantunu.encounterarena.views.ui.fragments.PlayerTournaments
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_player_actvity.*
@@ -51,6 +52,7 @@ class PlayerActvity : AppCompatActivity() {
                 R.id.tournaments -> navigateToFragment(PlayerTournaments())
                 R.id.notifications -> navigateToFragment(Notifications())
                 R.id.myprofile -> navigateToFragment(MyProfile())
+                R.id.ongoing -> navigateToFragment(OngoingFragment())
             }
             true
         }
