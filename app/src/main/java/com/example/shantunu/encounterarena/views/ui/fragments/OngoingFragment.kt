@@ -11,6 +11,7 @@ import com.example.shantunu.encounterarena.Constants
 import com.example.shantunu.encounterarena.R
 import com.example.shantunu.encounterarena.Utils
 import com.example.shantunu.encounterarena.models.Tournament
+import com.example.shantunu.encounterarena.models.User
 import com.example.shantunu.encounterarena.views.adapter.RvPlayerTournamentAdapter
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -75,6 +76,14 @@ class OngoingFragment : Fragment() {
                 counterFirst +=1
 
                 var tournament = p0.getValue(Tournament::class.java) as Tournament
+
+                for (eachSnapshot in p0.child(Constants.USERS_JOINED).children) {
+                    var user = eachSnapshot.getValue(User::class.java) as User
+//                    usersJoined.add(user)
+                    if (user.id == currUserID)
+                        tournament.isCurrentUserJoined = true
+                }
+
                 ongoingTournaments.add(tournament)
                 rvTournamentPlayerAdapter?.notifyDataSetChanged()
             }

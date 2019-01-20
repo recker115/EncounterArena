@@ -88,6 +88,7 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
                 if (tournament.isCurrentUserJoined) {
                     var intent = Intent(context, TournamentDetails::class.java)
                     intent.putExtra(Constants.ID, tournament.id)
+                    intent.putExtra(Constants.IS_ONGOING, tournament.isOngoing)
                     context.startActivity(intent)
                 }
             }

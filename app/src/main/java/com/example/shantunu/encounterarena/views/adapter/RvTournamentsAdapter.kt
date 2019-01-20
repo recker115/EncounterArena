@@ -91,6 +91,13 @@ class RvTournamentsAdapter(val context: Context, val tournaments : MutableList<T
                 }
             }
 
+            if (tournament.roomId.isEmpty()){
+                holder.ivAdminOngoing.visibility = View.GONE
+            }
+            else {
+                holder.ivAdminOngoing.visibility = View.VISIBLE
+            }
+
             holder.ivAdminOngoing.setOnClickListener{
                 it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
                 AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(tournament.id)

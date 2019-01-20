@@ -8,7 +8,8 @@ class Tournament(@get:PropertyName(Constants.WINS_AMT) @set:PropertyName(Constan
                  @get:PropertyName(Constants.ID) @set:PropertyName(Constants.ID) var id: String = "",
                  @get:PropertyName(Constants.PLAYERS_JOINED) @set:PropertyName(Constants.PLAYERS_JOINED) var playersJoined: String = "0",
                  @get:PropertyName(Constants.YOUTUBE_LINK) @set:PropertyName(Constants.YOUTUBE_LINK) var youtubeLink: String = "",
-                 @get:PropertyName(Constants.IS_ONGOING) @set:PropertyName(Constants.IS_ONGOING) var isOngoing: Boolean = false) {
+                 @get:PropertyName(Constants.IS_ONGOING) @set:PropertyName(Constants.IS_ONGOING) var isOngoing: Boolean = false,
+                 @get:PropertyName(Constants.ROOM_ID) @set:PropertyName(Constants.ROOM_ID) var roomId: String = "") {
 
     @PropertyName(Constants.TOURNY_NAME)
     var name : String ?= null
@@ -24,8 +25,7 @@ class Tournament(@get:PropertyName(Constants.WINS_AMT) @set:PropertyName(Constan
     var map : String ?= null
     @PropertyName(Constants.TIMESTAMP)
     var timeStamp : String ?= null
-    @PropertyName(Constants.ROOM_ID)
-    var roomId : String ?= null
+
     @PropertyName(Constants.MAX_PLAYERS)
     var maxPlayers : String ?= null
 

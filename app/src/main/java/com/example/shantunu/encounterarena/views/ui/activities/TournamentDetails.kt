@@ -14,6 +14,7 @@ import com.example.shantunu.encounterarena.R
 import com.example.shantunu.encounterarena.Utils
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -23,6 +24,8 @@ class TournamentDetails : AppCompatActivity() {
 
     var counter = 0
     var dialogRoom : Dialog ?= null
+    var isOnGoing : Boolean ?= false
+    var realtimeDb : DatabaseReference ?= null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +36,17 @@ class TournamentDetails : AppCompatActivity() {
 
     private fun initMembers() {
         val id = intent?.extras?.getString(Constants.ID)
+        isOnGoing = intent?.extras?.getBoolean(Constants.IS_ONGOING)
+
+        isOnGoing?.let {
+
+            realtimeDb = if (it) {
+                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.ONGOING)
+            } else {
+                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
+            }
+
+        }
 
         id?.let {
             addValueEventListener(it)
@@ -40,7 +54,7 @@ class TournamentDetails : AppCompatActivity() {
     }
 
     private fun addValueEventListener(id: String) {
-        AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(id)
+        realtimeDb?.child(id)
             ?.addValueEventListener(object : ValueEventListener{
                 override fun onDataChange(p0: DataSnapshot) {
 
