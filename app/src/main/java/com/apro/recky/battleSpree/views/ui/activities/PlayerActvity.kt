@@ -1,8 +1,12 @@
 package com.apro.recky.battleSpree.views.ui.activities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.apro.recky.battleSpree.AppClass
 import com.apro.recky.battleSpree.Constants
@@ -11,11 +15,29 @@ import com.apro.recky.battleSpree.views.ui.fragments.MyProfile
 import com.apro.recky.battleSpree.views.ui.fragments.Notifications
 import com.apro.recky.battleSpree.views.ui.fragments.OngoingFragment
 import com.apro.recky.battleSpree.views.ui.fragments.PlayerTournaments
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_player_actvity.*
 import kotlinx.android.synthetic.main.collapsing_toolbar.*
 
-class PlayerActvity : AppCompatActivity() {
+
+class PlayerActvity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawer.closeDrawer(GravityCompat.START)
+        when(item.itemId) {
+            R.id.nav_wallet -> {
+
+            }
+            R.id.nav_logout -> {
+                AppClass.getAppInstance()?.getFirebaseAuth()?.signOut()
+                getSharedPreferences(Constants.APP_SHARED_PREF, Context.MODE_PRIVATE).edit().clear().apply()
+                startActivity(Intent(this, Splash::class.java).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP))
+                finish()
+            }
+        }
+        return true
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +49,29 @@ class PlayerActvity : AppCompatActivity() {
     private fun initMembers() {
         title = "Players"
         setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.mipmap.menu)
+        }
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         navigateToFragment(PlayerTournaments())
         setBottomNavigations()
+        setSideNavigation()
         setFcmToken()
+    }
+
+    private fun setSideNavigation() {
+        val toggle = ActionBarDrawerToggle(
+            this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        //drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+        navView.setNavigationItemSelectedListener(this)
+
+        //set title
+
     }
 
     private fun setFcmToken() {
@@ -51,7 +91,7 @@ class PlayerActvity : AppCompatActivity() {
             when(it.itemId) {
                 R.id.tournaments -> navigateToFragment(PlayerTournaments())
                 R.id.notifications -> navigateToFragment(Notifications())
-                R.id.myprofile -> navigateToFragment(MyProfile())
+//                R.id.myprofile -> navigateToFragment(MyProfile())
                 R.id.ongoing -> navigateToFragment(OngoingFragment())
             }
             true
@@ -65,7 +105,8 @@ class PlayerActvity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             android.R.id.home -> {
-                onBackPressed()
+                drawer.openDrawer(GravityCompat.START)
+                true
             }
         }
         return super.onOptionsItemSelected(item)

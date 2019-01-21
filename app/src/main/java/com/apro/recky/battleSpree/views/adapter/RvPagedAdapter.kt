@@ -1,6 +1,5 @@
 package com.apro.recky.battleSpree.views.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -9,7 +8,7 @@ import com.apro.recky.battleSpree.R
 import com.apro.recky.battleSpree.models.EachNotification
 import com.apro.recky.battleSpree.views.viewHolders.NotificationViewHolder
 
-class RvPagedAdapter(context: Context) : PagedListAdapter<EachNotification, NotificationViewHolder>(DIFF_CALLBACK) {
+class RvPagedAdapter : PagedListAdapter<EachNotification, NotificationViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
         val layoutView = LayoutInflater.from(parent.context).inflate(R.layout.notification_item, parent, false)

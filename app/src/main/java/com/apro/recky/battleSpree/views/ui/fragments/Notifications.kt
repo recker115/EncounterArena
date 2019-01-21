@@ -33,7 +33,7 @@ class Notifications : Fragment(), LifecycleOwner {
         super.onViewCreated(view, savedInstanceState)
         activity?.let {
             it.title = "Notifications"
-            rvNotifcationsAdapter = RvPagedAdapter(it)
+            rvNotifcationsAdapter = RvPagedAdapter()
             rvNotifications.adapter = rvNotifcationsAdapter
             rvNotifications.layoutManager = LinearLayoutManager(it)
         }

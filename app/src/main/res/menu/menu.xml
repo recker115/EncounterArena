@@ -20,9 +20,9 @@
         android:icon="@mipmap/notification"
         android:title="Notifications"
         />
-    <item
+   <!-- <item
         android:id="@+id/myprofile"
         android:icon="@mipmap/profile"
         android:title="My Profile"
-        />
+        />-->
 </menu>
