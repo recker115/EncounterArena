@@ -1,27 +1,31 @@
 package com.example.shantunu.encounterarena.views.ui.activities
 
 import android.app.Dialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shantunu.encounterarena.AppClass
 import com.example.shantunu.encounterarena.Constants
 import com.example.shantunu.encounterarena.R
 import com.example.shantunu.encounterarena.Utils
+import com.example.shantunu.encounterarena.models.User
+import com.example.shantunu.encounterarena.views.adapter.RvUsersJoinedAdapter
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
-import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.activity_tournament_details.*
 
 class TournamentDetails : AppCompatActivity() {
 
+    private val usersJoined: MutableList<User> = mutableListOf()
+    var rvUsersJoinedAdapter : RvUsersJoinedAdapter ?= null
     var counter = 0
     var dialogRoom : Dialog ?= null
     var isOnGoing : Boolean ?= false
@@ -47,6 +51,10 @@ class TournamentDetails : AppCompatActivity() {
             }
 
         }
+
+        rvUsersJoinedAdapter = RvUsersJoinedAdapter(usersJoined, this@TournamentDetails)
+        rvUsersJoined.adapter = rvUsersJoinedAdapter
+        rvUsersJoined.layoutManager = LinearLayoutManager(this@TournamentDetails, LinearLayoutManager.HORIZONTAL, false)
 
         id?.let {
             addValueEventListener(it)
@@ -96,6 +104,13 @@ class TournamentDetails : AppCompatActivity() {
                             showRoomDialog(roomId, password)
                         }
                     }
+
+                    for (eachSnapshot in p0.child(Constants.USERS_JOINED).children) {
+                        var user = eachSnapshot.getValue(User::class.java) as User
+                        usersJoined.add(user)
+                    }
+                    rvUsersJoinedAdapter?.notifyDataSetChanged()
+
                     counter += 1
                 }
 

@@ -128,8 +128,6 @@
                     android:id="@+id/shimmerWinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginLeft="8dp"
@@ -178,8 +176,6 @@
                     android:id="@+id/shimmerPerKill"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cardView"
                     app:layout_constraintStart_toEndOf="@+id/shimmerWinner"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -224,6 +220,26 @@
                             android:layout_marginLeft="8dp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rvUsersJoined"
+                    tools:listitem="@layout/player_item"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView16" android:layout_marginTop="8dp"/>
+            <TextView
+                    android:text="Users Joined"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView16"
+                    style="@style/title"
+                    android:textColor="@color/green"
+                    app:layout_constraintTop_toBottomOf="@+id/shimmerPerKill" android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="8dp" android:layout_marginRight="8dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -103,7 +103,7 @@ class PlayerTournaments : Fragment() {
                 for (eachSnapshot in p0.child(Constants.USERS_JOINED).children) {
                     var user = eachSnapshot.getValue(User::class.java) as User
 //                    usersJoined.add(user)
-                    if (user.id.equals(currUserID))
+                    if (user.id == currUserID)
                         tournament.isCurrentUserJoined = true
                 }
 

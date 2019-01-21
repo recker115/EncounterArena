@@ -24,6 +24,14 @@
               android:background="#66000000"
               app:layout_collapseMode="parallax"
         />
+        <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/ivPlay"
+                android:src="@mipmap/youtube"
+                android:layout_gravity="center"
+                app:layout_collapseMode="parallax"
+        />
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 app:layout_collapseMode="pin"

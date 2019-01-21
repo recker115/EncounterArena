@@ -10,9 +10,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".views.ui.activities.TournamentDetails"
-                  android:theme="@style/AppTheme.NoActionBar"
-        >
+        <activity android:name=".views.ui.activities.TermsConditions">
+        </activity>
+        <activity
+                android:name=".views.ui.activities.TournamentDetails"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <service android:name=".fcm.FcmService">
