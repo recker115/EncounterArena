@@ -1,9 +1,12 @@
 package com.apro.recky.battleSpree.views.ui.activities
 
 import android.app.Dialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -21,6 +24,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
 import kotlinx.android.synthetic.main.activity_tournament_details.*
+import kotlinx.android.synthetic.main.collapsing_toolbar.*
+
 
 class TournamentDetails : AppCompatActivity() {
 
@@ -55,6 +60,11 @@ class TournamentDetails : AppCompatActivity() {
         rvUsersJoinedAdapter = RvUsersJoinedAdapter(usersJoined, this@TournamentDetails)
         rvUsersJoined.adapter = rvUsersJoinedAdapter
         rvUsersJoined.layoutManager = LinearLayoutManager(this@TournamentDetails, LinearLayoutManager.HORIZONTAL, false)
+
+        ivPlay.setOnClickListener{
+            it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=Hxy8BZGQ5Jo")))
+        }
 
         id?.let {
             addValueEventListener(it)

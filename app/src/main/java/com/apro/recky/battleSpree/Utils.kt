@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
@@ -61,12 +62,15 @@ class Utils {
             return FirebaseAuth.getInstance().currentUser
         }
 
-        fun showProgressBar(progressBar : ProgressBar, loadingView : View, context: Context) {
+        fun showProgressBar(loadingView : View, context: Context) {
             loadingView.visibility = View.VISIBLE
-            progressBar.indeterminateDrawable = FoldingCirclesDrawable.Builder(context).build()
         }
         fun hideProgressBar(loadingView : View) {
             loadingView.visibility = View.GONE
+        }
+
+        fun displayLongToast(message : String, context: Context) {
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         }
 
     }

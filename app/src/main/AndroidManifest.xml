@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
           package="com.apro.recky.battleSpree">
 
     <application
             android:name="com.apro.recky.battleSpree.AppClass"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
+            android:label="@string/battle_spree"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            tools:replace="android:label">
         <activity android:name="com.apro.recky.battleSpree.views.ui.activities.TermsConditions">
         </activity>
         <activity
@@ -26,11 +27,6 @@
         <activity
                 android:name="com.apro.recky.battleSpree.views.ui.activities.AdminAddRoom"
                 android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
                 android:name="com.apro.recky.battleSpree.views.ui.activities.Login"
@@ -59,6 +55,11 @@
         <activity
                 android:name="com.apro.recky.battleSpree.views.ui.activities.Splash"
                 android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 

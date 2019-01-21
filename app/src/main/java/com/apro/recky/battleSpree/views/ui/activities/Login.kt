@@ -2,6 +2,9 @@ package com.apro.recky.battleSpree.views.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.util.Patterns.EMAIL_ADDRESS
+import android.util.Patterns.PHONE
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
@@ -9,11 +12,13 @@ import com.apro.recky.battleSpree.AppClass
 import com.apro.recky.battleSpree.Constants
 import com.apro.recky.battleSpree.R
 import com.apro.recky.battleSpree.Utils
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DatabaseReference
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
 import io.ghyeok.stickyswitch.widget.StickySwitch
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.loading_view.*
+
 
 class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
 
@@ -39,11 +44,33 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
 
         }
 
+        tvForgotPass.setOnClickListener{
+            it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+            if (!EMAIL_ADDRESS.matcher(etEmail.text.toString()).matches()) {
+                Utils.displayLongToast("Please fill the email first..", this@Login)
+            } else {
+                performForgotPass()
+            }
+        }
+
         mDatebaseRef = AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.USERS)
     }
 
+    private fun performForgotPass() {
+        AppClass.getAppInstance()?.getFirebaseAuth()?.sendPasswordResetEmail(etEmail.text.toString())
+            ?.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Utils.displayLongToast("Password reset email sent ! Check Email", this@Login)
+                } else {
+                    Utils.displayLongToast("Email id not registered !", this@Login)
+                }
+            }
+    }
+
     private fun processLogin() {
-        Utils.showProgressBar(pbMain, loadingView, this)
+        Utils.showProgressBar(loadingView, this)
+        pbMain.indeterminateDrawable = FoldingCirclesDrawable.Builder(this@Login).build()
+
         pbMain.indeterminateDrawable = FoldingCirclesDrawable.Builder(this).build()
         if (isSignUp) {
             createNewUser()
@@ -56,7 +83,6 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
         AppClass.getAppInstance()?.getFirebaseAuth()?.signInWithEmailAndPassword(etEmail.text.toString(),
             etPassword.text.toString())?.addOnCompleteListener { task2 ->
             run {
-
                 Utils.hideProgressBar(loadingView)
                 if (task2.isSuccessful) {
                     startActivity(Intent(this@Login, PlayerActvity::class.java))
@@ -85,6 +111,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
                         userMap[Constants.EMAIL] = etEmail.text.toString()
                         userMap[Constants.PASSWORD] = etPassword.text.toString()
                         userMap[Constants.UUID] = it
+                        userMap[Constants.PHONE_NUMBER] = etPhoneNumber.text.toString()
 
                         mDatebaseRef?.child(it)?.setValue(userMap)?.addOnCompleteListener { task1 ->
                             run {
@@ -99,7 +126,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
                 }
                 else {
                     // handle error
-                    etPassword.error = "Password is not in proper format."
+                    etPassword.error = "Enter a secure password."
                 }
             }
         }
@@ -107,8 +134,8 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
 
     private fun isPlayerValidated(): Boolean {
         when{
-            etEmail.text.toString().isEmpty() -> {
-                etEmail.error = "Fill it"
+            !EMAIL_ADDRESS.matcher(etEmail.text.toString()).matches() -> {
+                etEmail.error = "Need proper email"
                 return false
             }
             etPassword.text.toString().isEmpty() -> {
@@ -118,6 +145,9 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
             isSignUp -> {
                 if (etPassword.text.toString() != etConfirmPassword.text.toString() ) {
                     etPassword.error = "Passwords do not match."
+                    return false
+                } else if (!PHONE.matcher(etPhoneNumber.text.toString()).matches()) {
+                    etPhoneNumber.error = "Need proper phone"
                     return false
                 }
             }
@@ -131,10 +161,16 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
         if (isSignUp) {
             btnLogin.text = getString(R.string.only_signup)
             confirmPassword.visibility = View.VISIBLE
+            phone.visibility = View.VISIBLE
+            tvForgotPass.text = ""
+            tvForgotPass.isEnabled = false
         }
         else{
             btnLogin.text = getString(R.string.only_signin)
             confirmPassword.visibility = View.GONE
+            phone.visibility = View.GONE
+            tvForgotPass.text = "Forgot Password ?"
+            tvForgotPass.isEnabled = true
         }
     }
 }

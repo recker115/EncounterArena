@@ -30,5 +30,6 @@ class Constants {
         const val DATABASE_NAME: String = "appDatabase_db"
         const val ONGOING : String = "OnGoing"
         const val IS_ONGOING : String = "IsOnGoing"
+        const val PHONE_NUMBER: String = "Phone"
     }
 }
