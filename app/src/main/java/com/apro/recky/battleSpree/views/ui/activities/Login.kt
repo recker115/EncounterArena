@@ -2,7 +2,6 @@ package com.apro.recky.battleSpree.views.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns.EMAIL_ADDRESS
 import android.util.Patterns.PHONE
 import android.view.View
@@ -12,7 +11,6 @@ import com.apro.recky.battleSpree.AppClass
 import com.apro.recky.battleSpree.Constants
 import com.apro.recky.battleSpree.R
 import com.apro.recky.battleSpree.Utils
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.database.DatabaseReference
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
 import io.ghyeok.stickyswitch.widget.StickySwitch
@@ -126,7 +124,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
                 }
                 else {
                     // handle error
-                    etPassword.error = "Enter a secure password."
+                    etPassword.error = task2.exception?.message
                 }
             }
         }

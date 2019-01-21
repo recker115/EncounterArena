@@ -85,8 +85,7 @@
                     android:textCursorDrawable="@null"
                     android:textColor="@color/colorPrimaryDark"
                     android:textColorHint="@color/colorAccent"
-                    android:fontFamily="@font/font_for_app"
-            />
+                    android:fontFamily="@font/font_for_app"/>
 
         </com.github.florent37.materialtextfield.MaterialTextField>
 
