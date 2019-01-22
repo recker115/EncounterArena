@@ -41,14 +41,14 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
                 <data
-                        android:host="www.example.com"
+                        android:host="www.battlespree.com"
                         android:pathPrefix="/Encounter"
                         android:scheme="http"/>
                 <!-- note that the leading "/" is required for pathPrefix -->
                 <!-- Accepts URIs that begin with "example://gizmos” -->
                 <data
                         android:host="pubg"
-                        android:scheme="example"/>
+                        android:scheme="appro"/>
             </intent-filter>
         </activity>
         <activity
