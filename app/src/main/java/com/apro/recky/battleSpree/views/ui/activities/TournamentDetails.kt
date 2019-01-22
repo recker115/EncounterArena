@@ -26,7 +26,6 @@ import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
 import kotlinx.android.synthetic.main.activity_tournament_details.*
 import kotlinx.android.synthetic.main.collapsing_toolbar.*
 
-
 class TournamentDetails : AppCompatActivity() {
 
     private val usersJoined: MutableList<User> = mutableListOf()
@@ -35,6 +34,7 @@ class TournamentDetails : AppCompatActivity() {
     var dialogRoom : Dialog ?= null
     var isOnGoing : Boolean ?= false
     var realtimeDb : DatabaseReference ?= null
+    var url = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +63,7 @@ class TournamentDetails : AppCompatActivity() {
 
         ivPlay.setOnClickListener{
             it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=Hxy8BZGQ5Jo")))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         }
 
         id?.let {
@@ -119,6 +119,8 @@ class TournamentDetails : AppCompatActivity() {
                         var user = eachSnapshot.getValue(User::class.java) as User
                         usersJoined.add(user)
                     }
+
+                    url = p0.child(Constants.YOUTUBE_LINK).value.toString()
                     rvUsersJoinedAdapter?.notifyDataSetChanged()
 
                     counter += 1

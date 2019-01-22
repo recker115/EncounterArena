@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.apro.recky.battleSpree">
 
     <application
-            android:name="com.apro.recky.battleSpree.AppClass"
+            android:name=".AppClass"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/battle_spree"
@@ -11,25 +12,27 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:replace="android:label">
-        <activity android:name="com.apro.recky.battleSpree.views.ui.activities.TermsConditions">
+        <activity android:name=".views.ui.activities.UserWallet">
+        </activity>
+        <activity android:name=".views.ui.activities.TermsConditions">
         </activity>
         <activity
-                android:name="com.apro.recky.battleSpree.views.ui.activities.TournamentDetails"
+                android:name=".views.ui.activities.TournamentDetails"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <service android:name="com.apro.recky.battleSpree.fcm.FcmService">
+        <service android:name=".fcm.FcmService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
             </intent-filter>
         </service>
 
         <activity
-                android:name="com.apro.recky.battleSpree.views.ui.activities.AdminAddRoom"
+                android:name=".views.ui.activities.AdminAddRoom"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name="com.apro.recky.battleSpree.views.ui.activities.Login"
+                android:name=".views.ui.activities.Login"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter android:label="@string/filter_title_pubg">
                 <action android:name="android.intent.action.VIEW"/>
@@ -49,11 +52,11 @@
             </intent-filter>
         </activity>
         <activity
-                android:name="com.apro.recky.battleSpree.views.ui.activities.PlayerActvity"
+                android:name=".views.ui.activities.PlayerActvity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name="com.apro.recky.battleSpree.views.ui.activities.Splash"
+                android:name=".views.ui.activities.Splash"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

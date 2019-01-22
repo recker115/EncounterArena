@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -11,17 +13,21 @@ import androidx.fragment.app.Fragment
 import com.apro.recky.battleSpree.AppClass
 import com.apro.recky.battleSpree.Constants
 import com.apro.recky.battleSpree.R
-import com.apro.recky.battleSpree.views.ui.fragments.MyProfile
 import com.apro.recky.battleSpree.views.ui.fragments.Notifications
 import com.apro.recky.battleSpree.views.ui.fragments.OngoingFragment
 import com.apro.recky.battleSpree.views.ui.fragments.PlayerTournaments
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_player_actvity.*
 import kotlinx.android.synthetic.main.collapsing_toolbar.*
 
-
 class PlayerActvity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    var userEmail : String ?= null
+    var currentUserId : String ?= null
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         drawer.closeDrawer(GravityCompat.START)
@@ -55,6 +61,8 @@ class PlayerActvity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
 //        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        currentUserId = AppClass.getAppInstance()?.currentUuId
+
         navigateToFragment(PlayerTournaments())
         setBottomNavigations()
         setSideNavigation()
@@ -71,7 +79,20 @@ class PlayerActvity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         navView.setNavigationItemSelectedListener(this)
 
         //set title
+        AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.USERS)?.child(currentUserId.toString())
+            ?.child(Constants.EMAIL)?.addValueEventListener(object : ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {
 
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    var email : String = p0.value.toString()
+                    var headerView : View = navView.getHeaderView(0)
+                    val tvUserEmai : TextView = headerView.findViewById(R.id.tvUserEmail)
+                    tvUserEmai.text = email
+                }
+
+            })
     }
 
     private fun setFcmToken() {

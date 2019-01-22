@@ -46,6 +46,7 @@ class OngoingFragment : Fragment() {
         }
 
         activity?.let {
+            it.title = "OnGoing"
             rvTournamentPlayerAdapter = RvPlayerTournamentAdapter(it, ongoingTournaments, currUserID)
             rvOngoingTournaments.adapter = rvTournamentPlayerAdapter
             rvOngoingTournaments.layoutManager = LinearLayoutManager(it)

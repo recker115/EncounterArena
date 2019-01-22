@@ -39,6 +39,9 @@ class PlayerTournaments : Fragment() {
 
     private fun initMembers() {
 
+        activity?.let {
+            it.title = "Upcoming"
+        }
         tournaments.add(Tournament())
         tournaments.add(Tournament())
         tournaments.add(Tournament())
@@ -60,6 +63,9 @@ class PlayerTournaments : Fragment() {
         AppClass.APPINSTANCE?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.addChildEventListener(object :
             ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {
+                tournaments.clear()
+                rvTournamentPlayerAdapter?.notifyDataSetChanged()
+                activity?.let { Utils.displayLongToast(p0.message, it) }
             }
 
             override fun onChildMoved(p0: DataSnapshot, p1: String?) {
