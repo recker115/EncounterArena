@@ -33,7 +33,7 @@ class PlayerActvity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         drawer.closeDrawer(GravityCompat.START)
         when(item.itemId) {
             R.id.nav_wallet -> {
-
+                startActivity(Intent(this@PlayerActvity, UserWallet::class.java))
             }
             R.id.nav_logout -> {
                 AppClass.getAppInstance()?.getFirebaseAuth()?.signOut()

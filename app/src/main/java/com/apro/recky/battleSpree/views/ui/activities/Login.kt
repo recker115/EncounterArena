@@ -110,6 +110,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
                         userMap[Constants.PASSWORD] = etPassword.text.toString()
                         userMap[Constants.UUID] = it
                         userMap[Constants.PHONE_NUMBER] = etPhoneNumber.text.toString()
+                        userMap[Constants.WALLET_AMOUNT] = "0"
 
                         mDatebaseRef?.child(it)?.setValue(userMap)?.addOnCompleteListener { task1 ->
                             run {

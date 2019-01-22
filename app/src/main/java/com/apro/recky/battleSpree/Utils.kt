@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +16,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
 import java.text.SimpleDateFormat
 import java.util.*
+import android.view.inputmethod.InputMethodManager.HIDE_IMPLICIT_ONLY
+import androidx.core.content.ContextCompat.getSystemService
+
+
 
 class Utils {
     companion object {
@@ -73,5 +78,9 @@ class Utils {
             Toast.makeText(context, message, Toast.LENGTH_LONG).show()
         }
 
+        fun showKeyboard() {
+            val imm = (AppClass.getAppInstance()?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+        }
     }
 }

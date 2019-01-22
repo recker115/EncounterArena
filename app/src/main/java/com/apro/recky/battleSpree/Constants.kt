@@ -31,5 +31,6 @@ class Constants {
         const val ONGOING : String = "OnGoing"
         const val IS_ONGOING : String = "IsOnGoing"
         const val PHONE_NUMBER: String = "Phone"
+        const val WALLET_AMOUNT: String = "Wallet Amount"
     }
 }
