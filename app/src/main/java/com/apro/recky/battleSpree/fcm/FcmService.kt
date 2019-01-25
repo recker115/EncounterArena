@@ -48,7 +48,7 @@ class FcmService : FirebaseMessagingService(), CoroutineScope {
                     notifyRoomId()
                     storeNotification(title,p0.data["RoomId"], p0.data["Password"] , type)
 //                }
-            }
+                }
         }
     }
 
@@ -69,16 +69,11 @@ class FcmService : FirebaseMessagingService(), CoroutineScope {
     }
 
     private fun postDeviceToken(p0: String?) {
-
         var currentUUID = AppClass.getAppInstance()?.getFirebaseAuth()?.currentUser?.uid
-
-        currentUUID?.let { it->  {
-            p0?.let {p0->{
-                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.USERS)?.child(it)
-                    ?.child(Constants.FCM_TOKEN)?.setValue(p0) }
-            } }
+        if (currentUUID != null) {
+            AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.USERS)?.child(currentUUID)
+                ?.child(Constants.FCM_TOKEN)?.setValue(p0)
         }
-
     }
 
     fun initNotification(title: String?, body: String?) {

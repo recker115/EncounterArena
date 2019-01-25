@@ -13,31 +13,32 @@
             android:layout_width="match_parent"
     />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <EditText android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:hint="@string/edittext_hint"
-                      android:textSize="30sp"
-                      android:background="@null"
-                      app:layout_constraintStart_toStartOf="parent"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintTop_toTopOf="parent"
-                      android:id="@+id/etAmount"
-                      android:layout_marginTop="100dp"/>
-            <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" app:srcCompat="@mipmap/rupee"
-                    android:id="@+id/imageView9"
-                    app:layout_constraintTop_toTopOf="@+id/etAmount"
-                    app:layout_constraintBottom_toBottomOf="@+id/etAmount"
-                    app:layout_constraintEnd_toStartOf="@+id/etAmount" android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:hint="@string/edittext_hint"
+                  android:textSize="30sp"
+                  android:background="@null"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:id="@+id/etAmount"
+                  android:inputType="number"
+                  android:layout_marginTop="100dp"/>
+        <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp" app:srcCompat="@mipmap/rupee"
+                android:id="@+id/imageView9"
+                app:layout_constraintTop_toTopOf="@+id/etAmount"
+                app:layout_constraintBottom_toBottomOf="@+id/etAmount"
+                app:layout_constraintEnd_toStartOf="@+id/etAmount" android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_gravity="bottom|end"
@@ -45,8 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:visibility="gone"
             app:srcCompat="@mipmap/tick"
-            android:id="@+id/fabAddAmount" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp"/>
+            android:id="@+id/fabAddAmount" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -111,6 +111,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
                         userMap[Constants.UUID] = it
                         userMap[Constants.PHONE_NUMBER] = etPhoneNumber.text.toString()
                         userMap[Constants.WALLET_AMOUNT] = "0"
+                        userMap[Constants.FULL_NAME] = etName.text.toString()
 
                         mDatebaseRef?.child(it)?.setValue(userMap)?.addOnCompleteListener { task1 ->
                             run {
@@ -148,6 +149,9 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
                 } else if (!PHONE.matcher(etPhoneNumber.text.toString()).matches()) {
                     etPhoneNumber.error = "Need proper phone"
                     return false
+                } else if(etName.text.toString().isEmpty()){
+                    etPhoneNumber.error = "Name is mandatory!"
+                    return false
                 }
             }
         }
@@ -161,6 +165,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
             btnLogin.text = getString(R.string.only_signup)
             confirmPassword.visibility = View.VISIBLE
             phone.visibility = View.VISIBLE
+            name.visibility = View.VISIBLE
             tvForgotPass.text = ""
             tvForgotPass.isEnabled = false
         }
@@ -168,6 +173,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
             btnLogin.text = getString(R.string.only_signin)
             confirmPassword.visibility = View.GONE
             phone.visibility = View.GONE
+            name.visibility = View.GONE
             tvForgotPass.text = "Forgot Password ?"
             tvForgotPass.isEnabled = true
         }

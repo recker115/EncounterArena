@@ -165,6 +165,39 @@
 
             </com.github.florent37.materialtextfield.MaterialTextField>
 
+            <com.github.florent37.materialtextfield.MaterialTextField
+                    android:id="@+id/name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:mtf_labelColor="@color/colorAccent"
+                    app:mtf_image="@mipmap/name"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/font_for_app"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/phone">
+                <EditText
+                        android:id="@+id/etName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:hint="Full Name"
+                        android:maxLines="1"
+                        android:inputType="textPersonName"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textCursorDrawable="@null"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorAccent"
+                        android:fontFamily="@font/font_for_app"
+                />
+
+            </com.github.florent37.materialtextfield.MaterialTextField>
+
             <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="0dp"
@@ -176,13 +209,13 @@
                     android:text="@string/only_signin"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/phone"
-                    android:layout_marginTop="70dp" android:layout_marginBottom="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toBottomOf="@+id/name"
+                    android:layout_marginTop="50dp"/>
 
             <io.ghyeok.stickyswitch.widget.StickySwitch
                     android:layout_width="wrap_content"
-                    android:layout_height="100dp"
+                    android:layout_height="130dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

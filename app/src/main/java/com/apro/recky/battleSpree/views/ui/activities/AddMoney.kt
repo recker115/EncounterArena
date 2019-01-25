@@ -1,6 +1,8 @@
 package com.apro.recky.battleSpree.views.ui.activities
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -28,7 +30,25 @@ class AddMoney : AppCompatActivity() {
         etAmount.requestFocus()
 
         ivWallets.visibility = View.GONE
-//        showKeyboard()
+
+        etAmount.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (p0.toString().isEmpty()) {
+                    fabAddAmount.visibility = View.GONE
+                } else {
+                    fabAddAmount.visibility = View.VISIBLE
+                }
+            }
+
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
