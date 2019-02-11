@@ -83,6 +83,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
             run {
                 Utils.hideProgressBar(loadingView)
                 if (task2.isSuccessful) {
+                    AppClass.getAppInstance()?.generateUuid()
                     startActivity(Intent(this@Login, PlayerActvity::class.java))
                     finish()
                 }
@@ -116,6 +117,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
                         mDatebaseRef?.child(it)?.setValue(userMap)?.addOnCompleteListener { task1 ->
                             run {
                                 if (task1.isSuccessful) {
+                                    AppClass.getAppInstance()?.generateUuid()
                                     startActivity(Intent(this@Login, PlayerActvity::class.java))
                                     finish()
                                 }

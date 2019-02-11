@@ -10,7 +10,6 @@ import com.google.firebase.database.FirebaseDatabase
 class AppClass : Application() {
 
     var mRealTimeDatabase : DatabaseReference ?= null
-    var mFirebaseAuth : FirebaseAuth ?= null
     var currentUuId : String = ""
     var appDatabase : AppDatabase ?= null
 
@@ -26,9 +25,15 @@ class AppClass : Application() {
         appDatabase = Room.databaseBuilder(this@AppClass, AppDatabase::class.java, Constants.DATABASE_NAME).build()
     }
 
+    fun generateUuid(){
+        currentUuId = getFirebaseAuth().currentUser?.uid.toString()
+    }
+
     fun getRealTimeDatabase() : DatabaseReference {
-        mRealTimeDatabase?.let {
-            return mRealTimeDatabase as DatabaseReference
+        return if (mRealTimeDatabase != null) {
+            mRealTimeDatabase as DatabaseReference
+        } else {
+            FirebaseDatabase.getInstance().reference
         }
     }
 
