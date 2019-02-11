@@ -2,11 +2,14 @@ package com.apro.recky.battleSpree.views.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.apro.recky.battleSpree.AppClass
 import com.apro.recky.battleSpree.Constants
@@ -17,7 +20,11 @@ import com.apro.recky.battleSpree.views.ui.activities.TournamentDetails
 import com.apro.recky.battleSpree.views.viewHolders.PlaceHolder
 import com.apro.recky.battleSpree.views.viewHolders.TournyPlayerViewHolder
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.iid.FirebaseInstanceId
+import org.w3c.dom.Text
 import java.util.LinkedHashMap
 
 class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableList<Tournament>,
@@ -100,7 +107,37 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
         val dialogAddId = Utils.getDialog(context, R.layout.dialog_pubg_id)
         val etPubGid = dialogAddId.findViewById<View>(R.id.etPubGId) as TextInputEditText
         val btnSetId = dialogAddId.findViewById<View>(R.id.btnAddPubgId) as Button
+        val tvInitialAmt = dialogAddId.findViewById<View>(R.id.tvEarlierAmt) as TextView
+        val tvFinalAmt = dialogAddId.findViewById<View>(R.id.tvFinal) as TextView
+        var initialAmt = 0.0
 
+        tvInitialAmt.paintFlags = tvInitialAmt.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+
+        btnSetId.isEnabled = false
+
+        AppClass.getAppInstance()?.getRealTimeDatabase()
+            ?.child(Constants.USERS)
+            ?.child(curUserId)
+            ?.child(Constants.WALLET_AMOUNT)
+            ?.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    initialAmt = p0.value.toString().toDouble()
+                    tvInitialAmt.text = context.getString(R.string.rs) + " "+initialAmt.toInt()
+                    if (tournament.entryFee.toDouble() < initialAmt) {
+                        tvFinalAmt.text = context.getString(R.string.rs)+ " "+(initialAmt.toInt() - tournament.entryFee.toInt()).toString()
+                        btnSetId.isEnabled = true
+                    } else {
+                        tvFinalAmt.text = "Entry fee is "+ context.getString(R.string.rs) +" "+ tournament.entryFee
+                        tvInitialAmt.paintFlags = tvInitialAmt.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                        Toast.makeText(context, "You dont have enough balance to register", Toast.LENGTH_LONG).show()
+                    }
+
+                }
+            })
         btnSetId.setOnClickListener{
             it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
             if (etPubGid.text.toString().isEmpty()) {
@@ -108,28 +145,33 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
             }
             else {
                 dialogAddId.dismiss()
-
-                if (tournament.playersJoined.toInt() <= tournament.maxPlayers?.toInt()!!) {
-                    AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
-                        ?.child(tournament.id)?.child(Constants.PLAYERS_JOINED)?.setValue((tournament.playersJoined.toInt()+1).toString())
-
-                    FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { token ->
-                        run {
-                            val strToken = token.token
-
-                            var userJoinedMap : LinkedHashMap<String, String> = LinkedHashMap()
-                            userJoinedMap[Constants.ID] = curUserId
-                            userJoinedMap[Constants.PUBG_ID] = etPubGid.text.toString()
-                            userJoinedMap[Constants.FCM_TOKEN] = strToken
-
+                AppClass.getAppInstance()?.getRealTimeDatabase()
+                    ?.child(Constants.USERS)
+                    ?.child(curUserId)
+                    ?.child(Constants.WALLET_AMOUNT)
+                    ?.setValue((initialAmt - tournament.entryFee.toDouble()).toString())
+                    ?.addOnSuccessListener {
+                        if (tournament.playersJoined.toInt() <= tournament.maxPlayers?.toInt()!!) {
                             AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
-                                ?.child(tournament.id)
-                                ?.child(Constants.USERS_JOINED)
-                                ?.push()?.setValue(userJoinedMap)
+                                ?.child(tournament.id)?.child(Constants.PLAYERS_JOINED)?.setValue((tournament.playersJoined.toInt()+1).toString())
+
+                            FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { token ->
+                                run {
+                                    val strToken = token.token
+
+                                    var userJoinedMap : LinkedHashMap<String, String> = LinkedHashMap()
+                                    userJoinedMap[Constants.ID] = curUserId
+                                    userJoinedMap[Constants.PUBG_ID] = etPubGid.text.toString()
+                                    userJoinedMap[Constants.FCM_TOKEN] = strToken
+
+                                    AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
+                                        ?.child(tournament.id)
+                                        ?.child(Constants.USERS_JOINED)
+                                        ?.push()?.setValue(userJoinedMap)
+                                }
+                            }
                         }
                     }
-                }
-
             }
         }
 

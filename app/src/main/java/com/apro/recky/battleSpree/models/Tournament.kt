@@ -16,7 +16,7 @@ class Tournament(@get:PropertyName(Constants.WINS_AMT) @set:PropertyName(Constan
     @PropertyName(Constants.PER_KILL)
     var perKill : String ?= null
     @PropertyName(Constants.ENTRY_FEE)
-    var entryFee : String ?= null
+    var entryFee : String = "0"
     @PropertyName(Constants.TYPE)
     var type : String ?= null
     @PropertyName(Constants.VERSION)
