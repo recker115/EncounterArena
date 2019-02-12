@@ -137,7 +137,7 @@ class AdminAddRoom : AppCompatActivity() {
                 var tournament = p0.getValue(Tournament::class.java) as Tournament
 
                 if (tournament.isOngoing) {
-                    AppClass.APPINSTANCE?.getRealTimeDatabase()?.child(Constants.ONGOING)
+                    AppClass.APPINSTANCE?.getRealTimeDatabase()?.child(Constants.RESULTS)
                         ?.child(p0.key.toString())?.setValue(p0.value)
                     AppClass.APPINSTANCE?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)?.child(tournament.id)?.removeValue()
                 }

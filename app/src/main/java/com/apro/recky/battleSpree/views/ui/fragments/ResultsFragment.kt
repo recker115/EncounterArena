@@ -18,7 +18,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import kotlinx.android.synthetic.main.fragment_ongoing.*
 
-class OngoingFragment : Fragment() {
+class ResultsFragment : Fragment() {
 
     var counterFirst = 0
     var ongoingTournaments = mutableListOf<Tournament>()
@@ -46,7 +46,7 @@ class OngoingFragment : Fragment() {
         }
 
         activity?.let {
-            it.title = "OnGoing"
+            it.title = "Results"
             rvTournamentPlayerAdapter = RvPlayerTournamentAdapter(it, ongoingTournaments, currUserID)
             rvOngoingTournaments.adapter = rvTournamentPlayerAdapter
             rvOngoingTournaments.layoutManager = LinearLayoutManager(it)
@@ -57,7 +57,7 @@ class OngoingFragment : Fragment() {
 
     fun setChildListeners() {
 
-        AppClass.APPINSTANCE?.getRealTimeDatabase()?.child(Constants.ONGOING)?.addChildEventListener(object :
+        AppClass.APPINSTANCE?.getRealTimeDatabase()?.child(Constants.RESULTS)?.addChildEventListener(object :
             ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }

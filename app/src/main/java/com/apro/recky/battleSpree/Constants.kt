@@ -33,5 +33,6 @@ class Constants {
         const val PHONE_NUMBER: String = "Phone"
         const val WALLET_AMOUNT: String = "Wallet Amount"
         const val FULL_NAME: String = "Full Name"
+        const val RESULTS: String = "Results"
     }
 }

@@ -5,11 +5,11 @@
         android:icon="@mipmap/tournament"
         android:title="Tournaments"
         />
-    <item
+    <!--<item
         android:id="@+id/ongoing"
         android:icon="@mipmap/ongoing"
         android:title="On Going"
-        />
+        />-->
     <item
         android:id="@+id/results"
         android:icon="@mipmap/results"

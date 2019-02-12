@@ -50,7 +50,7 @@ class TournamentDetails : AppCompatActivity() {
         isOnGoing?.let {
 
             realtimeDb = if (it) {
-                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.ONGOING)
+                AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.RESULTS)
             } else {
                 AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
             }

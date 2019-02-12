@@ -14,7 +14,7 @@ import com.apro.recky.battleSpree.AppClass
 import com.apro.recky.battleSpree.Constants
 import com.apro.recky.battleSpree.R
 import com.apro.recky.battleSpree.views.ui.fragments.Notifications
-import com.apro.recky.battleSpree.views.ui.fragments.OngoingFragment
+import com.apro.recky.battleSpree.views.ui.fragments.ResultsFragment
 import com.apro.recky.battleSpree.views.ui.fragments.PlayerTournaments
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.database.DataSnapshot
@@ -26,7 +26,6 @@ import kotlinx.android.synthetic.main.collapsing_toolbar.*
 
 class PlayerActvity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var userEmail : String ?= null
     var currentUserId : String ?= null
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -113,7 +112,7 @@ class PlayerActvity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
                 R.id.tournaments -> navigateToFragment(PlayerTournaments())
                 R.id.notifications -> navigateToFragment(Notifications())
 //                R.id.myprofile -> navigateToFragment(MyProfile())
-                R.id.ongoing -> navigateToFragment(OngoingFragment())
+                R.id.results -> navigateToFragment(ResultsFragment())
             }
             true
         }
