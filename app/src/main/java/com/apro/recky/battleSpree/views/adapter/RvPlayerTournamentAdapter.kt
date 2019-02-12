@@ -16,7 +16,7 @@ import com.apro.recky.battleSpree.Constants
 import com.apro.recky.battleSpree.R
 import com.apro.recky.battleSpree.Utils
 import com.apro.recky.battleSpree.models.Tournament
-import com.apro.recky.battleSpree.views.ui.activities.TournamentDetails
+import com.apro.recky.battleSpree.views.ui.activities.player.TournamentDetails
 import com.apro.recky.battleSpree.views.viewHolders.PlaceHolder
 import com.apro.recky.battleSpree.views.viewHolders.TournyPlayerViewHolder
 import com.google.android.material.textfield.TextInputEditText
@@ -24,7 +24,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.iid.FirebaseInstanceId
-import org.w3c.dom.Text
 import java.util.LinkedHashMap
 
 class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableList<Tournament>,

@@ -1,4 +1,4 @@
-package com.apro.recky.battleSpree.views.ui.activities
+package com.apro.recky.battleSpree.views.ui.activities.player
 
 import android.content.Context
 import android.content.Intent

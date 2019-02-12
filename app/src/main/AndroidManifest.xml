@@ -3,6 +3,16 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.apro.recky.battleSpree">
 
+    <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission-sdk-23 android:name="android.permission.READ_SMS"/>
+    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE"/>
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:name=".AppClass"
             android:allowBackup="true"
@@ -12,19 +22,24 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:replace="android:label">
-        <activity android:name=".views.ui.activities.AddMoney"
-                  android:theme="@style/AppTheme.NoActionBar"
-                  android:windowSoftInputMode="stateVisible|adjustResize"
-                  android:configChanges="orientation|screenSize">
+        <activity android:name=".views.ui.activities.admin.ResultsActivity">
         </activity>
-        <activity android:name=".views.ui.activities.UserWallet"
-                  android:theme="@style/AppTheme.NoActionBar"
-        >
-        </activity>
-        <activity android:name=".views.ui.activities.TermsConditions">
+        <activity android:name=".views.ui.activities.admin.UpdateResults">
         </activity>
         <activity
-                android:name=".views.ui.activities.TournamentDetails"
+                android:name=".views.ui.activities.player.AddMoney"
+                android:configChanges="orientation|screenSize"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:windowSoftInputMode="stateVisible|adjustResize">
+        </activity>
+        <activity
+                android:name=".views.ui.activities.player.UserWallet"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".views.ui.activities.player.TermsConditions">
+        </activity>
+        <activity
+                android:name=".views.ui.activities.player.TournamentDetails"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
@@ -35,14 +50,18 @@
         </service>
 
         <activity
-                android:name=".views.ui.activities.AdminAddRoom"
+                android:name=".views.ui.activities.admin.AdminAddRoom"
                 android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
-                android:name=".views.ui.activities.Login"
+                android:name=".views.ui.activities.player.Login"
                 android:theme="@style/AppTheme.NoActionBar"
-                android:windowSoftInputMode="stateAlwaysHidden"
-        >
+                android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter android:label="@string/filter_title_pubg">
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -61,37 +80,25 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".views.ui.activities.PlayerActvity"
+                android:name=".views.ui.activities.player.PlayerActvity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name=".views.ui.activities.Splash"
+                android:name=".views.ui.activities.player.Splash"
                 android:theme="@style/AppTheme.NoActionBar">
+
+            <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            -->
         </activity>
-    <meta-data android:name="instamojo.orderauth.url"
-                   android:value="https://elitesmurf.com/access_token.php"
-            />
+
+        <meta-data
+                android:name="instamojo.orderauth.url"
+                android:value="https://elitesmurf.com/access_token.php"/>
     </application>
-    <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS"/>
- 
-    <uses-permission-sdk-23 android:name="android.permission.READ_SMS"/>
- 
-    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE"/>
- 
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
- 
-    <uses-permission android:name="android.permission.READ_SMS"/>
- 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
- 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
- 
-    <uses-permission android:name="android.permission.INTERNET"/>
- 
 
 </manifest>

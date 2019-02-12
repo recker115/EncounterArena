@@ -1,13 +1,13 @@
-package com.apro.recky.battleSpree.views.ui.activities
+package com.apro.recky.battleSpree.views.ui.activities.admin
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import com.apro.recky.battleSpree.R
 
-class TermsConditions : AppCompatActivity() {
+class UpdateResults : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_terms_conditions)
+        setContentView(R.layout.activity_update_results)
     }
 }

@@ -1,4 +1,4 @@
-package com.apro.recky.battleSpree.views.ui.activities
+package com.apro.recky.battleSpree.views.ui.activities.player
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,7 @@ import com.apro.recky.battleSpree.AppClass
 import com.apro.recky.battleSpree.Constants
 import com.apro.recky.battleSpree.R
 import com.apro.recky.battleSpree.Utils
+import com.apro.recky.battleSpree.views.ui.activities.admin.AdminAddRoom
 import com.google.firebase.auth.FirebaseAuth
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
 import kotlinx.android.synthetic.main.activity_splash.*

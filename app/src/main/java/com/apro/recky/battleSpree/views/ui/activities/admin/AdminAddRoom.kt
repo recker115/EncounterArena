@@ -1,4 +1,4 @@
-package com.apro.recky.battleSpree.views.ui.activities
+package com.apro.recky.battleSpree.views.ui.activities.admin
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
@@ -18,6 +18,7 @@ import com.apro.recky.battleSpree.R
 import com.apro.recky.battleSpree.Utils
 import com.apro.recky.battleSpree.models.Tournament
 import com.apro.recky.battleSpree.views.adapter.RvTournamentsAdapter
+import com.apro.recky.battleSpree.views.ui.activities.player.PlayerActvity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.ChildEventListener
@@ -120,6 +121,8 @@ class AdminAddRoom : AppCompatActivity() {
         rvTournyAdapter = RvTournamentsAdapter(this, tournaments)
         rvTournaments.adapter = rvTournyAdapter
         rvTournaments.layoutManager = LinearLayoutManager(this)
+
+
 
         listenTournamentDatabase()
     }

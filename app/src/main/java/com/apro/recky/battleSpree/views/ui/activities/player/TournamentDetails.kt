@@ -1,4 +1,4 @@
-package com.apro.recky.battleSpree.views.ui.activities
+package com.apro.recky.battleSpree.views.ui.activities.player
 
 import android.app.Dialog
 import android.content.Intent
@@ -24,7 +24,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable
 import kotlinx.android.synthetic.main.activity_tournament_details.*
-import kotlinx.android.synthetic.main.collapsing_toolbar.*
 
 class TournamentDetails : AppCompatActivity() {
 

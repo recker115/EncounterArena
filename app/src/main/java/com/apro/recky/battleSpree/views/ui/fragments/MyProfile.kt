@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.apro.recky.battleSpree.AppClass
 import com.apro.recky.battleSpree.Constants
 import com.apro.recky.battleSpree.R
-import com.apro.recky.battleSpree.views.ui.activities.Splash
+import com.apro.recky.battleSpree.views.ui.activities.player.Splash
 import kotlinx.android.synthetic.main.add_wallets.*
 import kotlinx.android.synthetic.main.fragment_my_profile.*
 
