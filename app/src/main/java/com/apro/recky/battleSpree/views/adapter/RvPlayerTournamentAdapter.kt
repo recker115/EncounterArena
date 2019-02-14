@@ -162,11 +162,13 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
                                     userJoinedMap[Constants.ID] = curUserId
                                     userJoinedMap[Constants.PUBG_ID] = etPubGid.text.toString()
                                     userJoinedMap[Constants.FCM_TOKEN] = strToken
+                                    userJoinedMap[Constants.KILLS] = "0"
+                                    userJoinedMap[Constants.MONEY_WON] = "0"
 
                                     AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.TOURNAMENTS)
                                         ?.child(tournament.id)
                                         ?.child(Constants.USERS_JOINED)
-                                        ?.push()?.setValue(userJoinedMap)
+                                        ?.child(curUserId)?.setValue(userJoinedMap)
                                 }
                             }
                         }

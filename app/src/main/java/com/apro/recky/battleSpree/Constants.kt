@@ -34,5 +34,7 @@ class Constants {
         const val WALLET_AMOUNT: String = "Wallet Amount"
         const val FULL_NAME: String = "Full Name"
         const val RESULTS: String = "Results"
+        const val KILLS : String = "Kills"
+        const val MONEY_WON : String = "Amount won"
     }
 }

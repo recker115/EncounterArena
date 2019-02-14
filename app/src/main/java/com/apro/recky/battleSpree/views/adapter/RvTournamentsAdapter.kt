@@ -1,6 +1,7 @@
 package com.apro.recky.battleSpree.views.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.apro.recky.battleSpree.Constants
 import com.apro.recky.battleSpree.R
 import com.apro.recky.battleSpree.Utils
 import com.apro.recky.battleSpree.models.Tournament
+import com.apro.recky.battleSpree.views.ui.activities.admin.UpdateResults
 import com.apro.recky.battleSpree.views.viewHolders.PlaceHolder
 import com.apro.recky.battleSpree.views.viewHolders.TournyViewHolder
 import com.google.android.material.textfield.TextInputEditText
@@ -89,6 +91,13 @@ class RvTournamentsAdapter(val context: Context, val tournaments : MutableList<T
                         }
                     }
                 }
+            }
+
+            holder.vRoot.setOnClickListener{
+                it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+                val intent = Intent(context, UpdateResults::class.java)
+                intent.putExtra(Constants.ID, tournament.id)
+                context.startActivity(intent)
             }
 
             if (tournament.roomId.isEmpty()){

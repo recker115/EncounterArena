@@ -23,4 +23,5 @@ class TournyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     var ivYoutubeLink : ImageView = itemView.findViewById(R.id.ivYouLink)
     var ivYoutube : ImageView = itemView.findViewById(R.id.ivYoutube)
     var ivAdminOngoing : ImageView = itemView.findViewById(R.id.ivAdminOngoing)
+    var vRoot : View = itemView.findViewById(R.id.vRoot)
 }

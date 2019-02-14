@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.text.InputType
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,7 +67,7 @@ class AdminAddRoom : AppCompatActivity() {
 
     private var myCalendar: Calendar  = Calendar.getInstance()
 
-    internal val date : DatePickerDialog.OnDateSetListener = DatePickerDialog.OnDateSetListener {
+    private val date : DatePickerDialog.OnDateSetListener = DatePickerDialog.OnDateSetListener {
             _, year, monthOfYear, dayOfMonth ->
         run {
             myCalendar.set(Calendar.YEAR, year)
@@ -120,9 +121,12 @@ class AdminAddRoom : AppCompatActivity() {
 
         rvTournyAdapter = RvTournamentsAdapter(this, tournaments)
         rvTournaments.adapter = rvTournyAdapter
-        rvTournaments.layoutManager = LinearLayoutManager(this)
+        rvTournaments.layoutManager = LinearLayoutManager(this@AdminAddRoom)
 
-
+        btnResults.setOnClickListener{
+            it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+            startActivity(Intent(this@AdminAddRoom, ResultsActivity::class.java))
+        }
 
         listenTournamentDatabase()
     }
@@ -149,6 +153,7 @@ class AdminAddRoom : AppCompatActivity() {
                         if (tournament.id == currTournament.id) {
                             currTournament.isRoomCreated = tournament.isRoomCreated
                             currTournament.youtubeLink = tournament.youtubeLink
+                            currTournament.roomId = tournament.roomId
                         }
                     }
                 }
