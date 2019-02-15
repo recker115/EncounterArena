@@ -117,16 +117,16 @@ class AddMoney : AppCompatActivity() {
         }catch ( e : Exception) {
             e.printStackTrace()
         }
-        initListener(amount)
+        initListener(amount, email)
         instamojoPay.start(activity, pay, instamojoListener)
     }
 
-    private fun initListener(amount: String) {
+    private fun initListener(amount: String, email: String) {
         instamojoListener = object : InstapayListener{
             override fun onSuccess(p0: String?) {
                 Toast.makeText(applicationContext, "Success", Toast.LENGTH_LONG)
                     .show()
-                updateUserWallet(amount)
+                updateUserWallet(amount, email)
             }
 
             override fun onFailure(p0: Int, p1: String?) {
@@ -137,7 +137,7 @@ class AddMoney : AppCompatActivity() {
         }
     }
 
-    private fun updateUserWallet(amount: String) {
+    private fun updateUserWallet(amount: String, email: String) {
 
         if (!currentAmount.isEmpty()) {
             AppClass.getAppInstance()?.getRealTimeDatabase()
@@ -147,8 +147,21 @@ class AddMoney : AppCompatActivity() {
                 ?.addOnCompleteListener{
                     if (it.isSuccessful){
                         // dismiss dialog
-                        onBackPressed()
-                        finish()
+                        val transactionsMap = linkedMapOf<String, String>()
+                        transactionsMap[Constants.IS_WITHDRAW] = "false"
+                        transactionsMap[Constants.AMOUNT] = amount
+                        transactionsMap[Constants.TIMESTAMP] = System.currentTimeMillis().toString()
+                        transactionsMap[Constants.DEPOSITED_BY] = email
+
+                        AppClass.getAppInstance()?.getRealTimeDatabase()
+                            ?.child(Constants.TRANSACTIONS)
+                            ?.child(currentUuId)
+                            ?.push()?.setValue(transactionsMap)
+                            ?.addOnSuccessListener {
+                                onBackPressed()
+                                finish()
+                            }
+
                     }
                 }
         }

@@ -36,5 +36,9 @@ class Constants {
         const val RESULTS: String = "Results"
         const val KILLS : String = "Kills"
         const val MONEY_WON : String = "Amount won"
+        const val TRANSACTIONS: String = "Transactions"
+        const val IS_WITHDRAW: String = "IsWithdraw"
+        const val AMOUNT: String = "Amount"
+        const val DEPOSITED_BY: String = "Deposited By"
     }
 }

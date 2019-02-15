@@ -22,8 +22,13 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:replace="android:label">
-        <activity android:name=".views.ui.activities.player.PlayerResults"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".views.ui.activities.player.TransactionsActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+        >
+        </activity>
+        <activity
+                android:name=".views.ui.activities.player.PlayerResults"
+                android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".views.ui.activities.admin.ResultsActivity">
         </activity>

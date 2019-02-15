@@ -8,9 +8,10 @@
         tools:context=".views.ui.activities.player.UserWallet">
 
     <include
-        layout="@layout/wallets_collapsing"
-        android:layout_height="200dp"
-        android:layout_width="match_parent"
+            android:id="@+id/included"
+            layout="@layout/wallets_collapsing"
+            android:layout_height="200dp"
+            android:layout_width="match_parent"
     />
 
     <androidx.core.widget.NestedScrollView
@@ -80,6 +81,23 @@
                     android:id="@+id/textView20" android:layout_marginTop="24dp"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/imageView8"
                     android:layout_marginLeft="16dp" android:layout_marginStart="16dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="10dp"
+                    android:background="@drawable/rectangle_background"
+                    android:text="View Transactions"
+                    style="@style/title"
+                    android:textStyle="normal"
+                    app:layout_collapseMode="parallax"
+                    android:id="@+id/tvTransactions"
+                    android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginRight="8dp" app:layout_constraintStart_toEndOf="@+id/textView20"
+                    android:layout_marginStart="8dp" android:layout_marginLeft="8dp"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

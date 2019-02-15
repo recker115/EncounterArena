@@ -64,8 +64,8 @@ class RvUsersJoinedAdmin(var usersJoined : MutableList<User>,
                                 override fun onDataChange(p0: DataSnapshot) {
 
                                     if (counter == 1) {
-                                        var userAmount = p0.value.toString()
-                                        var totalAmount = holder.etTotalAmt.text.toString().toDouble() + userAmount.toDouble()
+                                        val userAmount = p0.value.toString()
+                                        val totalAmount = holder.etTotalAmt.text.toString().toDouble() + userAmount.toDouble()
 
                                         AppClass.getAppInstance()?.getRealTimeDatabase()
                                             ?.child(Constants.USERS)
@@ -74,6 +74,19 @@ class RvUsersJoinedAdmin(var usersJoined : MutableList<User>,
                                             ?.setValue(totalAmount)
                                             ?.addOnSuccessListener {
                                                 Utils.displayLongToast("Wallet updated successfully !", context)
+
+                                                var adminTransactionMap : LinkedHashMap<String, String> = linkedMapOf()
+                                                adminTransactionMap[Constants.IS_WITHDRAW] = "false"
+                                                adminTransactionMap[Constants.TIMESTAMP] = System.currentTimeMillis().toString()
+                                                adminTransactionMap[Constants.AMOUNT] = holder.etTotalAmt.text.toString()
+                                                adminTransactionMap[Constants.DEPOSITED_BY] = "admin"
+
+
+                                                AppClass.getAppInstance()?.getRealTimeDatabase()
+                                                    ?.child(Constants.TRANSACTIONS)
+                                                    ?.child(usersJoined[position].id)
+                                                    ?.push()
+                                                    ?.setValue(adminTransactionMap)
                                             }
                                         counter +=1
                                     }

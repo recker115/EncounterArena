@@ -37,6 +37,11 @@ class UserWallet : AppCompatActivity() {
             startActivity(Intent(this@UserWallet, AddMoney::class.java))
         }
 
+        tvTransactions.setOnClickListener{
+            it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+            startActivity(Intent(this@UserWallet, TransactionsActivity::class.java))
+        }
+
         listenToUserDb()
     }
 
