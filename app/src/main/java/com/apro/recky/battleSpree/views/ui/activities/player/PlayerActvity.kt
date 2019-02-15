@@ -131,4 +131,14 @@ class PlayerActvity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onBackPressed() {
+        var currentFragment = supportFragmentManager.findFragmentById(R.id.frameContainer)
+        if (currentFragment is PlayerTournaments){
+            super.onBackPressed()
+        } else {
+            navigateToFragment(PlayerTournaments())
+            bottomNavigationView.selectedItemId = R.id.tournaments
+        }
+    }
 }

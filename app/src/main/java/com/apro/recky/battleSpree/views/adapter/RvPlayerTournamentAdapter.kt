@@ -16,6 +16,8 @@ import com.apro.recky.battleSpree.Constants
 import com.apro.recky.battleSpree.R
 import com.apro.recky.battleSpree.Utils
 import com.apro.recky.battleSpree.models.Tournament
+import com.apro.recky.battleSpree.views.ui.activities.admin.UpdateResults
+import com.apro.recky.battleSpree.views.ui.activities.player.PlayerResults
 import com.apro.recky.battleSpree.views.ui.activities.player.TournamentDetails
 import com.apro.recky.battleSpree.views.viewHolders.PlaceHolder
 import com.apro.recky.battleSpree.views.viewHolders.TournyPlayerViewHolder
@@ -91,12 +93,20 @@ class RvPlayerTournamentAdapter(val context: Context, val tournaments : MutableL
 
             holder.vRoot.setOnClickListener{
                 it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
-                if (tournament.isCurrentUserJoined) {
-                    var intent = Intent(context, TournamentDetails::class.java)
+
+                if (!tournament.isOngoing) {
+                    if (tournament.isCurrentUserJoined) {
+                        var intent = Intent(context, TournamentDetails::class.java)
+                        intent.putExtra(Constants.ID, tournament.id)
+                        intent.putExtra(Constants.IS_ONGOING, tournament.isOngoing)
+                        context.startActivity(intent)
+                    }
+                } else {
+                    val intent = Intent(context, PlayerResults::class.java)
                     intent.putExtra(Constants.ID, tournament.id)
-                    intent.putExtra(Constants.IS_ONGOING, tournament.isOngoing)
                     context.startActivity(intent)
                 }
+
             }
         }
 
