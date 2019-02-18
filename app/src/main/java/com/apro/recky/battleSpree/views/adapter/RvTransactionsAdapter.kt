@@ -23,7 +23,7 @@ class RvTransactionsAdapter(var transactions : MutableList<Transaction>, var con
     override fun onBindViewHolder(holder: TransactionViewHolder, position: Int) {
         val transaction = transactions[position]
         if (transaction.isWithdraw.toBoolean()) {
-            var withDraw = "Withdraw Requested by ${transaction.depositedBy}"
+            var withDraw = "Withdraw Requested by ${transaction.requestedBy}"
             holder.tvTransactionBy.text = withDraw
             holder.ivType.setImageResource(R.mipmap.with_draw)
         } else {
