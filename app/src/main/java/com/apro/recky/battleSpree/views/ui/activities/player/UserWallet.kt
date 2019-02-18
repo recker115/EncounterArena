@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.wallets_collapsing.*
 
 class UserWallet : AppCompatActivity() {
     var currentUuId = ""
+    var balance = ""
     var userWalletAmt = 0.0
     var email = ""
     var isWithDrawProcessing = false
@@ -26,25 +27,6 @@ class UserWallet : AppCompatActivity() {
         setContentView(R.layout.activity_user_wallet)
 
         initMembers()
-        getUserData()
-    }
-
-    fun getUserData() {
-        AppClass.getAppInstance()?.getRealTimeDatabase()
-            ?.child(Constants.USERS)
-            ?.child(currentUuId)
-            ?.addValueEventListener(object : ValueEventListener{
-                override fun onCancelled(p0: DatabaseError) {
-
-                }
-
-                override fun onDataChange(p0: DataSnapshot) {
-                    userWalletAmt = p0.child(Constants.WALLET_AMOUNT).value.toString().toDouble()
-                    email = p0.child(Constants.EMAIL).value.toString()
-                    isWithDrawProcessing = p0.child(Constants.IS_WITHDRAW_PROCESSING).value.toString().toBoolean()
-
-                }
-            })
     }
 
     private fun initMembers() {
@@ -135,24 +117,53 @@ class UserWallet : AppCompatActivity() {
             ?.child(currentUuId)
             ?.push()
             ?.setValue(transactionsMap)
+
+        AppClass.getAppInstance()?.getRealTimeDatabase()
+            ?.child(Constants.USERS)
+            ?.child(currentUuId)
+            ?.child(Constants.AMOUNT_REQUESTED)
+            ?.setValue(etWithdrawAmt.text.toString())
+
+        AppClass.getAppInstance()?.getRealTimeDatabase()
+            ?.child(Constants.USERS)
+            ?.child(currentUuId)
+            ?.child(Constants.WALLET_AMOUNT)
+            ?.setValue((balance.toDouble() - etWithdrawAmt.text.toString().toDouble()).toString())
+
     }
 
     private fun listenToUserDb() {
 
         currentUuId = AppClass.getAppInstance()?.currentUuId.toString()
 
-        AppClass.getAppInstance()?.getRealTimeDatabase()?.child(Constants.USERS)
+        AppClass.getAppInstance()?.getRealTimeDatabase()
+            ?.child(Constants.USERS)
             ?.child(currentUuId)
             ?.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    var balance = p0.child(Constants.WALLET_AMOUNT).value.toString()
-                    var number = p0.child(Constants.PHONE_NUMBER).value.toString()
+                    balance = p0.child(Constants.WALLET_AMOUNT).value.toString()
+                    val number = p0.child(Constants.PHONE_NUMBER).value.toString()
+                    userWalletAmt = p0.child(Constants.WALLET_AMOUNT).value.toString().toDouble()
+                    email = p0.child(Constants.EMAIL).value.toString()
+                    isWithDrawProcessing = p0.child(Constants.IS_WITHDRAW_PROCESSING).value.toString().toBoolean()
+                    val amountProcessing = p0.child(Constants.AMOUNT_REQUESTED).value.toString()
+
+                    if (amountProcessing != "null") {
+                        if (amountProcessing.toDouble() > 0)
+                            tvAmtProcessing.text = "Amount processing "+ getString(R.string.rs) + amountProcessing
+                        else {
+                            tvAmtProcessing.text = ""
+                        }
+                    } else {
+                        tvAmtProcessing.text = ""
+                    }
 
                     tvBalance.text = getString(R.string.rs)+" "+balance
                     tvNumber.text = number
+
                 }
 
             })

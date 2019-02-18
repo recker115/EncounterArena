@@ -43,5 +43,6 @@ class Constants {
         const val WITHDRAW_REQUEST: String = "All Withdraws"
         const val REQUESTED_BY: String = "WITHDRAW REQUESTED BY"
         const val IS_WITHDRAW_PROCESSING: String = "IS_WITHDRAW_PROCESSING"
+        const val AMOUNT_REQUESTED: String = "AMOUNT_REQUESTED"
     }
 }
