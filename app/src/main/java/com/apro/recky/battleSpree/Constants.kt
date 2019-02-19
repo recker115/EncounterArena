@@ -44,5 +44,6 @@ class Constants {
         const val REQUESTED_BY: String = "WITHDRAW REQUESTED BY"
         const val IS_WITHDRAW_PROCESSING: String = "IS_WITHDRAW_PROCESSING"
         const val AMOUNT_REQUESTED: String = "AMOUNT_REQUESTED"
+        const val IS_PAID: String = "Is Paid"
     }
 }

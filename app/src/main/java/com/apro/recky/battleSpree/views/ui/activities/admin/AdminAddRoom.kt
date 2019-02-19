@@ -128,6 +128,11 @@ class AdminAddRoom : AppCompatActivity() {
             startActivity(Intent(this@AdminAddRoom, ResultsActivity::class.java))
         }
 
+        btnViewWtithDraws.setOnClickListener{
+            it.startAnimation(AnimationUtils.loadAnimation(it.context, R.anim.button_shrink))
+            startActivity(Intent(this@AdminAddRoom, AdminWithdrawals::class.java))
+        }
+
         listenTournamentDatabase()
     }
 

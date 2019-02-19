@@ -114,6 +114,7 @@ class Login : AppCompatActivity() , StickySwitch.OnSelectedChangeListener {
                         userMap[Constants.WALLET_AMOUNT] = "0"
                         userMap[Constants.FULL_NAME] = etName.text.toString()
                         userMap[Constants.IS_WITHDRAW_PROCESSING] = "false"
+                        userMap[Constants.AMOUNT_REQUESTED] = "0"
 
                         mDatebaseRef?.child(it)?.setValue(userMap)?.addOnCompleteListener { task1 ->
                             run {

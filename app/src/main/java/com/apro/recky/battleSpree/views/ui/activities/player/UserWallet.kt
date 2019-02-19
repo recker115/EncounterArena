@@ -21,6 +21,8 @@ class UserWallet : AppCompatActivity() {
     var userWalletAmt = 0.0
     var email = ""
     var isWithDrawProcessing = false
+    var phnNumber = ""
+    var fcmToken = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +80,7 @@ class UserWallet : AppCompatActivity() {
             } else {
                 updateUserTransactions(email)
                 updateAdminTransactions(email)
+                etWithdrawAmt.setText("")
             }
         } else {
             Utils.displayLongToast("One withdraw request is already being processed!", this@UserWallet)
@@ -85,22 +88,26 @@ class UserWallet : AppCompatActivity() {
     }
 
     private fun updateAdminTransactions(email : String) {
+
+        val key = AppClass.getAppInstance()?.getRealTimeDatabase()
+            ?.child(Constants.WITHDRAW_REQUEST)
+            ?.child(currentUuId)
+            ?.push()?.key
+
         val transactionsMap = linkedMapOf<String, String>()
         transactionsMap[Constants.AMOUNT] = etWithdrawAmt.text.toString()
         transactionsMap[Constants.TIMESTAMP] = System.currentTimeMillis().toString()
         transactionsMap[Constants.REQUESTED_BY] = email
+        transactionsMap[Constants.PHONE_NUMBER] = phnNumber
+        transactionsMap[Constants.FCM_TOKEN] = fcmToken
+        transactionsMap[Constants.IS_PAID] = "false"
+        transactionsMap[Constants.ID] = key.toString()
 
         AppClass.getAppInstance()?.getRealTimeDatabase()
             ?.child(Constants.WITHDRAW_REQUEST)
-            ?.child(currentUuId)
-            ?.push()
+            ?.child(key.toString())
             ?.setValue(transactionsMap)
             ?.addOnSuccessListener {
-                AppClass.getAppInstance()?.getRealTimeDatabase()
-                    ?.child(Constants.USERS)
-                    ?.child(currentUuId)
-                    ?.child(Constants.IS_WITHDRAW_PROCESSING)
-                    ?.setValue("true")
             }
     }
 
@@ -123,6 +130,12 @@ class UserWallet : AppCompatActivity() {
             ?.child(currentUuId)
             ?.child(Constants.AMOUNT_REQUESTED)
             ?.setValue(etWithdrawAmt.text.toString())
+
+        AppClass.getAppInstance()?.getRealTimeDatabase()
+            ?.child(Constants.USERS)
+            ?.child(currentUuId)
+            ?.child(Constants.IS_WITHDRAW_PROCESSING)
+            ?.setValue("true")
 
         AppClass.getAppInstance()?.getRealTimeDatabase()
             ?.child(Constants.USERS)
@@ -150,10 +163,12 @@ class UserWallet : AppCompatActivity() {
                     email = p0.child(Constants.EMAIL).value.toString()
                     isWithDrawProcessing = p0.child(Constants.IS_WITHDRAW_PROCESSING).value.toString().toBoolean()
                     val amountProcessing = p0.child(Constants.AMOUNT_REQUESTED).value.toString()
+                    fcmToken = p0.child(Constants.FCM_TOKEN).value.toString()
+                    phnNumber = p0.child(Constants.PHONE_NUMBER).value.toString()
 
                     if (amountProcessing != "null") {
                         if (amountProcessing.toDouble() > 0)
-                            tvAmtProcessing.text = "Amount processing "+ getString(R.string.rs) + amountProcessing
+                            tvAmtProcessing.text = "Withdraw processing "+ getString(R.string.rs) + amountProcessing
                         else {
                             tvAmtProcessing.text = ""
                         }
